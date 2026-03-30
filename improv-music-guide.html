@@ -1,0 +1,2553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Improv Music Cheat Sheet</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1208;
+    --paper: #f5f0e8;
+    --cream: #ede7d5;
+    --gold: #c8922a;
+    --rust: #b84c2a;
+    --teal: #2a7a6e;
+    --blue: #2a4a7a;
+    --purple: #5a2a7a;
+    --green: #3a6a2a;
+    --red: #8a1a1a;
+    --warm-gray: #8a7a6a;
+    --pink: #8a2a5a;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    padding: 2rem 1rem 4rem;
+  }
+  .page { max-width: 960px; margin: 0 auto; }
+  header {
+    text-align: center;
+    border-bottom: 3px double var(--ink);
+    padding-bottom: 1.5rem;
+    margin-bottom: 2.5rem;
+  }
+  header .kicker {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--warm-gray);
+    margin-bottom: 0.5rem;
+  }
+  header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    line-height: 1.1;
+    margin-bottom: 0.5rem;
+  }
+  header .subtitle { font-size: 0.9rem; color: var(--warm-gray); font-style: italic; }
+  .tabs {
+    display: flex;
+    gap: 0.25rem;
+    margin-bottom: 2rem;
+    border-bottom: 2px solid var(--ink);
+    overflow-x: auto;
+    padding-bottom: 0;
+  }
+  .tab-btn {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.6rem 1.1rem;
+    background: none;
+    border: none;
+    border-bottom: 3px solid transparent;
+    margin-bottom: -2px;
+    cursor: pointer;
+    color: var(--warm-gray);
+    white-space: nowrap;
+    transition: all 0.15s;
+  }
+  .tab-btn:hover { color: var(--ink); }
+  .tab-btn.active { color: var(--ink); border-bottom-color: var(--ink); font-weight: 500; }
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.4rem;
+  }
+  .card {
+    background: var(--cream);
+    border: 1px solid #c8b898;
+    border-radius: 2px;
+    padding: 1.25rem 1.25rem 1rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+  }
+  .card.mood-teal::before { background: var(--teal); }
+  .card.mood-gold::before { background: var(--gold); }
+  .card.mood-rust::before { background: var(--rust); }
+  .card.mood-blue::before { background: var(--blue); }
+  .card.mood-purple::before { background: var(--purple); }
+  .card.mood-green::before { background: var(--green); }
+  .card.mood-red::before { background: var(--red); }
+  .card.mood-gray::before { background: var(--warm-gray); }
+  .card.mood-pink::before { background: var(--pink); }
+  .card-emoji { font-size: 1.8rem; margin-bottom: 0.4rem; display: block; }
+  .card h3 { font-family: 'Playfair Display', serif; font-size: 1.15rem; margin-bottom: 0.2rem; }
+  .card .scene-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--warm-gray);
+    margin-bottom: 0.75rem;
+  }
+  .pill-row { display: flex; flex-wrap: wrap; gap: 0.35rem; margin: 0.6rem 0; }
+  .pill {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    padding: 0.2rem 0.55rem;
+    border-radius: 100px;
+    background: #fff;
+    border: 1px solid #c8b898;
+    color: var(--ink);
+  }
+  .pill.key { background: var(--ink); color: #fff; border-color: var(--ink); }
+  .pill.instrument { background: #fff3e0; border-color: #d4aa60; }
+  .pill.keymode { background: #e4ddd0; border-color: #b0a090; color: #3a2a1a; font-size: 0.67rem; }
+  .rule-list { list-style: none; margin-top: 0.6rem; }
+  .rule-list li {
+    font-size: 0.82rem;
+    line-height: 1.5;
+    padding: 0.25rem 0;
+    border-top: 1px dashed #c8b898;
+    display: flex;
+    gap: 0.5rem;
+    align-items: flex-start;
+  }
+  .rule-list li:first-child { border-top: none; }
+  .rule-list li .bullet { color: var(--warm-gray); flex-shrink: 0; font-size: 0.7rem; margin-top: 0.2rem; }
+  .avoid-block {
+    margin-top: 0.6rem;
+    padding: 0.45rem 0.65rem;
+    background: #fff0ee;
+    border-left: 3px solid var(--rust);
+    border-radius: 0 2px 2px 0;
+  }
+  .avoid-block-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--rust);
+    margin-bottom: 0.2rem;
+  }
+  .avoid-block p {
+    font-size: 0.78rem;
+    line-height: 1.5;
+    color: #5a2a1a;
+  }
+  .chord-block {
+    margin-top: 0.85rem;
+    padding-top: 0.7rem;
+    border-top: 1px solid #c8b898;
+  }
+  .chord-block-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--warm-gray);
+    margin-bottom: 0.4rem;
+  }
+  .chord-prog {
+    display: inline-block;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    background: var(--ink);
+    color: var(--paper);
+    padding: 0.2rem 0.6rem;
+    border-radius: 2px;
+    margin: 0.18rem 0.18rem 0.18rem 0;
+    letter-spacing: 0.05em;
+  }
+  .chord-note {
+    font-size: 0.73rem;
+    color: #5a4a3a;
+    margin-top: 0.3rem;
+    font-style: italic;
+    line-height: 1.4;
+  }
+  .songs-block {
+    margin-top: 0.85rem;
+    padding-top: 0.7rem;
+    border-top: 1px solid #c8b898;
+  }
+  .songs-block-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--warm-gray);
+    margin-bottom: 0.45rem;
+  }
+  .song-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.38rem;
+    font-size: 0.8rem;
+    line-height: 1.3;
+  }
+  .song-title { flex: 1; color: var(--ink); }
+  .song-links { display: flex; gap: 0.3rem; flex-shrink: 0; }
+  .song-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    text-decoration: none;
+    font-size: 0.65rem;
+    font-family: 'DM Mono', monospace;
+    font-weight: 600;
+    border: 1px solid;
+    transition: all 0.15s;
+  }
+  .song-link.yt { background: #fff0f0; border-color: #cc0000; color: #cc0000; }
+  .song-link.yt:hover { background: #cc0000; color: #fff; }
+  .song-link.sp { background: #f0fff4; border-color: #1db954; color: #1db954; }
+  .song-link.sp:hover { background: #1db954; color: #fff; }
+  .feeling-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1rem;
+  }
+  .feeling-card {
+    background: var(--cream);
+    border: 1px solid #c8b898;
+    border-radius: 2px;
+    padding: 1rem;
+  }
+  .feeling-card h4 { font-family: 'Playfair Display', serif; font-size: 1rem; margin-bottom: 0.6rem; }
+  .feeling-detail { font-size: 0.8rem; line-height: 1.6; color: #3a2a1a; }
+  .feeling-detail strong {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    display: block;
+    color: var(--warm-gray);
+    margin-top: 0.5rem;
+  }
+  .feeling-detail strong:last-of-type {
+    color: var(--rust);
+  }
+  .f-chord { font-family: 'DM Mono', monospace; font-size: 0.7rem; background: var(--ink); color: var(--paper); padding: 0.15rem 0.4rem; border-radius: 2px; display: inline-block; margin: 0.1rem 0.1rem 0 0; }
+  .principles { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; }
+  .principle { background: var(--cream); border: 1px solid #c8b898; padding: 1.1rem; border-radius: 2px; }
+  .principle h4 { font-family: 'Playfair Display', serif; font-size: 1rem; margin-bottom: 0.5rem; }
+  .principle p { font-size: 0.82rem; line-height: 1.6; color: #3a2a1a; }
+  .big-quote {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    font-style: italic;
+    line-height: 1.5;
+    text-align: center;
+    color: var(--warm-gray);
+    padding: 1.5rem 2rem;
+    border-top: 1px solid #c8b898;
+    border-bottom: 1px solid #c8b898;
+    margin: 2rem 0;
+  }
+  .ref-table { width: 100%; border-collapse: collapse; font-size: 0.82rem; margin-bottom: 1.5rem; }
+  .ref-table th {
+    font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.1em;
+    text-transform: uppercase; text-align: left; padding: 0.5rem 0.75rem;
+    background: var(--ink); color: var(--paper);
+  }
+  .ref-table td { padding: 0.55rem 0.75rem; border-bottom: 1px solid #c8b898; vertical-align: top; line-height: 1.5; }
+  .ref-table tr:nth-child(even) td { background: #eae4d5; }
+  .section-title { font-family: 'Playfair Display', serif; font-size: 1.4rem; margin-bottom: 1rem; padding-bottom: 0.4rem; border-bottom: 1px solid #c8b898; }
+  .section-intro { font-size: 0.87rem; line-height: 1.7; color: #3a2a1a; margin-bottom: 1.5rem; max-width: 700px; }
+
+  /* ── Play button styles ── */
+  .play-row {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-top: 0.75rem;
+    padding-top: 0.6rem;
+    border-top: 1px dashed #c8b898;
+  }
+  .play-item {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+  }
+  .play-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--warm-gray);
+  }
+  .play-btn {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    font-weight: 500;
+    padding: 0.22rem 0.7rem;
+    background: var(--ink);
+    color: var(--paper);
+    border: none;
+    border-radius: 100px;
+    cursor: pointer;
+    transition: all 0.15s;
+    letter-spacing: 0.05em;
+  }
+  .play-btn:hover { opacity: 0.75; }
+  .play-btn.playing {
+    background: var(--rust);
+    animation: pulse 1s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.65; }
+  }
+
+  /* ── Rhythm toggle ── */
+  .rhythm-toggle-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink);
+    cursor: pointer;
+    padding: 0.45rem 0.6rem;
+    margin: 0.6rem 0 0;
+    border: 1px solid #c8b898;
+    border-radius: 2px;
+    background: #f0ece0;
+    user-select: none;
+    transition: background 0.15s;
+  }
+  .rhythm-toggle-btn:hover { background: #e8e2d0; }
+  .rhythm-toggle-icon { font-size: 0.9rem; }
+  .rhythm-toggle-caret { margin-left: auto; font-size: 0.6rem; color: var(--warm-gray); }
+
+  .rhythm-panel {
+    margin: 0 0 0.5rem;
+    border: 1px solid #c8b898;
+    border-top: none;
+    border-radius: 0 0 2px 2px;
+    background: #f8f4ec;
+    padding: 0.75rem 0.6rem 0.6rem;
+  }
+
+  .rhythm-fig-row {
+    display: flex;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+  }
+
+  .rhythm-fig {
+    flex: 1;
+    min-width: 200px;
+    border: 1.5px solid #c8b898;
+    border-radius: 2px;
+    padding: 0.5rem 0.5rem 0.3rem;
+    cursor: pointer;
+    background: #fff;
+    transition: border-color 0.15s, background 0.15s;
+  }
+  .rhythm-fig:hover { border-color: var(--ink); }
+  .rhythm-fig-active {
+    border-color: var(--teal);
+    background: #f0f8f6;
+  }
+  .rhythm-fig-active .rhythm-fig-name { color: var(--teal); }
+
+  .rhythm-fig-name {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--warm-gray);
+    margin-bottom: 0.4rem;
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  <header>
+    <div class="kicker">A Field Guide for Improvisers</div>
+    <h1>Music for the Stage<br><em>in the Moment</em></h1>
+    <div class="subtitle">Instant genre signals · chord progressions · reference songs · emotional cues · improv principles</div>
+  </header>
+
+  <nav class="tabs">
+    <button class="tab-btn active" onclick="showTab('genres',this)">Genres</button>
+    <button class="tab-btn" onclick="showTab('feelings',this)">Feelings &amp; Moods</button>
+    <button class="tab-btn" onclick="showTab('songgenres',this)">Song Genres</button>
+    <button class="tab-btn" onclick="showTab('instruments',this)">Instrument Choices</button>
+    <button class="tab-btn" onclick="showTab('transitions',this)">Transitions &amp; Techniques</button>
+    <button class="tab-btn" onclick="showTab('principles',this)">Improv Principles</button>
+  </nav>
+
+  <!-- GENRES -->
+  <div class="tab-panel active" id="tab-genres">
+    <p class="section-intro">Each genre has 2–3 unmistakable signals you can deploy in the first two seconds. Progressions use Roman numerals (key-neutral). <strong style="color:#cc0000">Y</strong> = YouTube search · <strong style="color:#1db954">S</strong> = Spotify search · 🎤 = primarily vocal song.</p>
+    <div class="card-grid">
+
+      <div class="card mood-gold" data-genre="western">
+        <span class="card-emoji">🤠</span>
+        <h3>Western / Country</h3>
+        <div class="scene-tag">Saloon · Ranch · Frontier</div>
+        <div class="pill-row"><span class="pill key">Boom-chuck bass</span><span class="pill instrument">Guitar, Fiddle, Steel guitar</span><span class="pill keymode">🎹 A, D, G major</span></div>
+        <ul class="rule-list">
+          <li><span class="bullet">▸</span> Root on beat 1, chord on beats 2&3 (waltz) or alternating (4/4)</li>
+          <li><span class="bullet">▸</span> Major pentatonic — open 5ths feel wide and dusty</li>
+          <li><span class="bullet">▸</span> Stiff, slightly square articulation; no rubato</li>
+          <li><span class="bullet">▸</span> Bright keys: A, D, G major</li>
+        </ul>
+        <div class="avoid-block"><div class="avoid-block-label">Avoid</div><p>Minor keys, legato phrasing, jazz chords, rubato — they all drain the dusty frontier feel instantly.</p></div>
+        <div class="chord-block">
+          <div class="chord-block-label">Chord Progressions</div>
+          <span class="chord-prog">I – IV – V – I</span><span class="chord-prog">I – V – IV – V</span>
+          <div class="chord-note">Keep changes slow (1–2 bars each). Add IV–I "amen" cadence at phrase ends.</div>
+        </div>
+        <div class="songs-block">
+          <div class="songs-block-label">Reference Songs</div>
+          <div class="song-row"><span class="song-title">Hank Williams — <em>Your Cheatin' Heart</em> 🎤</span><span class="song-links"><a class="song-link yt" href="https://www.youtube.com/results?search_query=Hank+Williams+Your+Cheatin+Heart" target="_blank">Y</a><a class="song-link sp" href="https://open.spotify.com/track/0w4duPAMQIPQXQ8SSUsQdU" target="_blank">S</a></span></div>
+          <div class="song-row"><span class="song-title">Morricone — <em>The Good, The Bad and The Ugly</em></span><span class="song-links"><a class="song-link yt" href="https://www.youtube.com/results?search_query=Morricone+The+Good+The+Bad+and+The+Ugly" target="_blank">Y</a><a class="song-link sp" href="https://open.spotify.com/track/28zAiJTi6BI9WMYqJa8D5F" target="_blank">S</a></span></div>
+          <div class="song-row"><span class="song-title">Dolly Parton — <em>Jolene</em> 🎤</span><span class="song-links"><a class="song-link yt" href="https://www.youtube.com/results?search_query=Dolly+Parton+Jolene" target="_blank">Y</a><a class="song-link sp" href="https://open.spotify.com/track/2SpEHTbUuebeLkgs9QB7Ue" target="_blank">S</a></span></div>
+        </div>
+      </div>
+
+      <div class="card mood-blue" data-genre="noir">
+        <span class="card-emoji">🎷</span>
+        <h3>Film Noir / Spy</h3>
+        <div class="scene-tag">Detective · Interrogation · 1950s intrigue</div>
+        <div class="pill-row"><span class="pill key">Sparse minor jazz chords</span><span class="pill instrument">Muted trumpet, Alto sax, Bass</span><span class="pill keymode">🎹 D min · F min · Dorian</span></div>
+        <ul class="rule-list">
+          <li><span class="bullet">▸</span> Half-diminished (ø) and minor 7 chords — leave silence</li>
+          <li><span class="bullet">▸</span> Walking bass feel, slow and suspicious</li>
+          <li><span class="bullet">▸</span> Tritone for danger — resolves nowhere comfortable</li>
+          <li><span class="bullet">▸</span> The silence IS the tension</li>
+        </ul>
+        <div class="avoid-block"><div class="avoid-block-label">Avoid</div><p>Busy passages, major keys, resolving cadences, or upbeat tempos — they break the cold, suspicious atmosphere.</p></div>
+        <div class="chord-block">
+          <div class="chord-block-label">Chord Progressions</div>
+          <span class="chord-prog">im7 – iiø7 – V7 – im</span><span class="chord-prog">im – bVII – bVI – V7</span>
+          <div class="chord-note">Play each chord once per bar, staccato. Let the last chord hang in silence.</div>
+        </div>
+        <div class="songs-block">
+          <div class="songs-block-label">Reference Songs</div>
+          <div class="song-row"><span class="song-title">Henry Mancini — <em>The Pink Panther Theme</em></span><span class="song-links"><a class="song-link yt" href="https://www.youtube.com/results?search_query=Henry+Mancini+The+Pink+Panther+Theme" target="_blank">Y</a><a class="song-link sp" href="https://open.spotify.com/track/0juPSJLFnLFim7BK6VzTes" target="_blank">S</a></span></div>
+          <div class="song-row"><span class="song-title">Chet Baker — <em>Almost Blue</em> 🎤</span><span class="song-links"><a class="song-link yt" href="https://www.youtube.com/results?search_query=Chet+Baker+Almost+Blue" target="_blank">Y</a><a class="song-link sp" href="https://open.spotify.com/track/71UqFvcVctWwyyV1Tet8eb" target="_blank">S</a></span></div>
+          <div class="song-row"><span class="song-title">John Barry — <em>James Bond Theme</em></span><span class="song-links"><a class="song-link yt" href="https://www.youtube.com/results?search_query=John+Barry+James+Bond+Theme" target="_blank">Y</a><a class="song-link sp" href="https://open.spotify.com/track/2LBjCONIbrxMQfDFkiM0Xl" target="_blank">S</a></span></div>
+        </div>
+      </div>
+
+      <div class="card mood-teal" data-genre="circus">
+        <span class="card-emoji">🎪</span>
+        <h3>Circus / Vaudeville</h3>
+        <div class="scene-tag">Clowns · Spectacle · Absurdity</div>
+        <div class="pill-row"><span class="pill key">Oom-pah bass</span><span class="pill instrument">Tuba, Calliope, Brass band</span><span class="pill keymode">🎹 C, G, F major</span></div>
+        <ul class="rule-list">
+          <li><span class="bullet">▸</span> Oom-pah: low root on 1, mid-chord on 2</li>
+          <li><span class="bullet">▸</span> Fast major key, staccato, bouncy</li>
+          <li><span class="bullet">▸</span> Chromatic runs up/down = pratfall</li>
+          <li><span class="bullet">▸</span> Sad clown: slow down, add minor seconds</li>
+        </ul>
+        <div class="avoid-block"><div class="avoid-block-label">Avoid</div><p>Legato lines, slow tempos, or complex harmonies — the circus lives and dies on relentless rhythmic momentum.</p></div>
+        <div class="chord-block">
+          <div class="chord-block-label">Chord Progressions</div>
+          <span class="chord-prog">I – I7 – IV – iv</span><span class="chord-prog">I – VI – II – V</span>
+          <div class="chord-note">The I7 (dominant 7th on tonic) is the single most "circus" sound — use it immediately.</div>
+        </div>
+        <div class="songs-block">
+          <div class="songs-block-label">Reference Songs</div>
+          <div class="song-row"><span class="song-title">Julius Fučík — <em>Entry of the Gladiators</em></span><span class="song-links"><a class="song-link yt" href="https://www.youtube.com/results?search_query=Julius+Fučík+Entry+of+the+Gladiators" target="_blank">Y</a><a class="song-link sp" href="https://open.spotify.com/track/3OkiSNTe8GcqeFUFMr31Xa" target="_blank">S</a></span></div>
+          <div class="song-row"><span class="song-title">Tom Waits — <em>Step Right Up</em> 🎤</span><span class="song-links"><a class="song-link yt" href="https://www.youtube.com/results?search_query=Tom+Waits+Step+Right+Up" target="_blank">Y</a><a class="song-link sp" href="https://open.spotify.com/track/1EkNGQUbA3mdU8BLamOkBp" target="_blank">S</a></span></div>
+          <div class="song-row"><span class="song-title">Scott Joplin — <em>The Entertainer</em></span><span class="song-links"><a class="song-link yt" href="https://www.youtube.com/results?search_query=Scott+Joplin+The+Entertainer" target="_blank">Y</a><a class="song-link sp" href="https://open.spotify.com/track/0DdCsAqIGBaivxRx5nMHuA" target="_blank">S</a></span></div>
+        </div>
+      </div>
+
+      <div class="card mood-rust" data-genre="epic">
+        <span class="card-emoji">🏛️</span>
+        <h3>Epic / Historical Drama</h3>
+        <div class="scene-tag">Battle · Royal court · Ancient world</div>
+        <div class="pill-row"><span class="pill key">Stately block chords</span><span class="pill instrument">Strings, Brass, Timpani, Organ</span><span class="pill keymode">🎹 D min · A min · Dorian</span></div>
+        <ul class="rule-list">
+          <li><span class="bullet">▸</span> Slow, deliberate block chords — every note counts</li>
+          <li><span class="bullet">▸</span> Octaves in bass, 5ths in right hand = power</li>
+          <li><span class="bullet">▸</span> Modulate up a half step at the climactic moment</li>
+          <li><span class="bullet">▸</span> Dorian or Phrygian for ancient/mysterious settings</li>
+        </ul>
+        <div class="avoid-block"><div class="avoid-block-label">Avoid</div><p>Fast passages, light textures, or high registers as your base — epic lives in the low-mid range, loud and weighty.</p></div>
+        <div class="chord-block">
+          <div class="chord-block-label">Chord Progressions</div>
+          <span class="chord-prog">i – VII – VI – VII</span><span class="chord-prog">I – V – vi – III – IV – I – IV – V</span>
+          <div class="chord-note">The IV–V ending feels triumphant and inevitable. Minor with raised VII = Dorian, ancient and noble.</div>
+        </div>
+        <div class="songs-block">
+          <div class="songs-block-label">Reference Songs</div>
+          <div class="song-row"><span class="song-title">Hans Zimmer — <em>Now We Are Free (Gladiator)</em></span><span class="song-links"><a class="song-link yt" href="https://www.youtube.com/results?search_query=Hans+Zimmer+Now+We+Are+Free+Gladiator" target="_blank">Y</a><a class="song-link sp" href="https://open.spotify.com/track/3NOZDUK9TBKMWv9BpkxVyL" target="_blank">S</a></span></div>
+          <div class="song-row"><span class="song-title">Carl Orff — <em>O Fortuna</em> 🎤</span><span class="song-links"><a class="song-link yt" href="https://www.youtube.com/results?search_query=Carl+Orff+O+Fortuna" target="_blank">Y</a><a class="song-link sp" href="https://open.spotify.com/track/1myMsqAEj4jPzaqEoboSKv" target="_blank">S</a></span></div>
+          <div class="song-row"><span class="song-title">John Williams — <em>Imperial March</em></span><span class="song-links"><a class="song-link yt" href="https://www.youtube.com/results?search_query=John+Williams+Imperial+March" target="_blank">Y</a><a class="song-link sp" href="https://open.spotify.com/track/1tl9D7gkjPAMkZrFCCEhA0" target="_blank">S</a></span></div>
+        </div>
+      </div>
+
+      <div class="card mood-purple" data-genre="gothic">
+        <span class="card-emoji">🧛</span>
+        <h3>Gothic / Horror</h3>
+        <div class="scene-tag">Haunted house · Villain entrance · Dread</div>
+        <div class="pill-row"><span class="pill key">Diminished chords</span><span class="pill instrument">Pipe organ, Strings, Theremin</span><span class="pill keymode">🎹 D min · Phrygian</span></div>
+        <ul class="rule-list">
+          <li><span class="bullet">▸</span> Diminished 7th chord = instant creepy (stack minor 3rds)</li>
+          <li><span class="bullet">▸</span> Tremolos in low register for sustained dread</li>
+          <li><span class="bullet">▸</span> Chromatic descending bassline (Lamento bass)</li>
+          <li><span class="bullet">▸</span> Single high note after silence = jump scare cue</li>
+        </ul>
+        <div class="avoid-block"><div class="avoid-block-label">Avoid</div><p>Major keys, bright registers, staccato bounce, or anything melodically resolved — horror needs to stay unresolved and heavy.</p></div>
+        <div class="chord-block">
+          <div class="chord-block-label">Chord Progressions</div>
+          <span class="chord-prog">i – viiø – i – V7</span><span class="chord-prog">i – bVII – bVI – V (Lamento)</span>
+          <div class="chord-note">The chromatic descent i–VII–VI–V is the oldest "dread" pattern in Western music.</div>
+        </div>
+        <div class="songs-block">
+          <div class="songs-block-label">Reference Songs</div>
+          <div class="song-row"><span class="song-title">Bach — <em>Toccata &amp; Fugue in D minor</em></span><span class="song-links"><a class="song-link yt" href="https://www.youtube.com/results?search_query=Bach+Toccata+and+Fugue+in+D+minor" target="_blank">Y</a><a class="song-link sp" href="https://open.spotify.com/track/2PpruBYOoDGkCpHiKZXEGe" target="_blank">S</a></span></div>
+          <div class="song-row"><span class="song-title">Nick Cave — <em>Red Right Hand</em> 🎤</span><span class="song-links"><a class="song-link yt" href="https://www.youtube.com/results?search_query=Nick+Cave+Red+Right+Hand" target="_blank">Y</a><a class="song-link sp" href="https://open.spotify.com/track/0qHeP8zt2WWef7EWCs1ECj" target="_blank">S</a></span></div>
+          <div class="song-row"><span class="song-title">Danny Elfman — <em>This Is Halloween</em> 🎤</span><span class="song-links"><a class="song-link yt" href="https://www.youtube.com/results?search_query=Danny+Elfman+This+Is+Halloween" target="_blank">Y</a><a class="song-link sp" href="https://open.spotify.com/track/1CYjYSg9sdtbBoxSf8uhFD" target="_blank">S</a></span></div>
+        </div>
+      </div>
+
+      <div class="card mood-green" data-genre="pastoral">
+        <span class="card-emoji">🌿</span>
+        <h3>Pastoral / Nature</h3>
+        <div class="scene-tag">Garden · Countryside · Fairy tale forest</div>
+        <div class="pill-row"><span class="pill key">Flowing arpeggios</span><span class="pill instrument">Flute, Harp, Acoustic guitar, Oboe</span><span class="pill keymode">🎹 G, D, F major · Lydian</span></div>
+        <ul class="rule-list">
+          <li><span class="bullet">▸</span> Rolling 6/8 or 12/8 arpeggios, wide voicings</li>
+          <li><span class="bullet">▸</span> Major with sus2/sus4 for airiness</li>
+          <li><span class="bullet">▸</span> Pentatonic melodies never clash</li>
+          <li><span class="bullet">▸</span> Whole-tone scale for magical/dream quality</li>
+        </ul>
+        <div class="avoid-block"><div class="avoid-block-label">Avoid</div><p>Staccato, percussive attacks, minor keys, or dense low-register chords — the pastoral world needs air and light.</p></div>
+        <div class="chord-block">
+          <div class="chord-block-label">Chord Progressions</div>
+          <span class="chord-prog">I – V/vi – vi – IV</span><span class="chord-prog">Isus2 – V – vi – IVadd9</span>
+          <div class="chord-note">Suspensions (add9, sus2) soften every chord. Try a 5th pedal tone in the bass throughout.</div>
+        </div>
+        <div class="songs-block">
+          <div class="songs-block-label">Reference Songs</div>
+          <div class="song-row"><span class="song-title">Debussy — <em>Clair de Lune</em></span><span class="song-links"><a class="song-link yt" href="https://www.youtube.com/results?search_query=Debussy+Clair+de+Lune" target="_blank">Y</a><a class="song-link sp" href="https://open.spotify.com/track/75S7u8pBwgjyjpljJPrKjj" target="_blank">S</a></span></div>
+          <div class="song-row"><span class="song-title">Enya — <em>May It Be</em> 🎤</span><span class="song-links"><a class="song-link yt" href="https://www.youtube.com/results?search_query=Enya+May+It+Be" target="_blank">Y</a><a class="song-link sp" href="https://open.spotify.com/track/0kFe50KLBI18yBMiMdwDR0" target="_blank">S</a></span></div>
+          <div class="song-row"><span class="song-title">Howard Shore — <em>The Shire (LOTR)</em></span><span class="song-links"><a class="song-link yt" href="https://www.youtube.com/results?search_query=Howard+Shore+The+Shire+LOTR" target="_blank">Y</a><a class="song-link sp" href="https://open.spotify.com/track/3jFMlUDJKFHqQF8v3xoA76" target="_blank">S</a></span></div>
+        </div>
+      </div>
+
+      <div class="card mood-blue" data-genre="scifi">
+        <span class="card-emoji">🚀</span>
+        <h3>Sci-Fi / Space</h3>
+        <div class="scene-tag">Spaceship · Alien encounter · Future</div>
+        <div class="pill-row"><span class="pill key">Quartal / atonal chords</span><span class="pill instrument">Synth pads, Theremin, Strings</span><span class="pill keymode">🎹 No home key · sus2 · sus4</span></div>
+        <ul class="rule-list">
+          <li><span class="bullet">▸</span> Quartal harmony (stack 4ths) = instantly "space"</li>
+          <li><span class="bullet">▸</span> Held sus2/sus4 chords with no resolution</li>
+          <li><span class="bullet">▸</span> Sparse, slow — space is vast and silent</li>
+          <li><span class="bullet">▸</span> Dissonant minor 2nds in high register for danger</li>
+        </ul>
+        <div class="avoid-block"><div class="avoid-block-label">Avoid</div><p>Resolving V7–I cadences, waltz bass patterns, or anything that sounds "of the earth" — resolution feels too human for space.</p></div>
+        <div class="chord-block">
+          <div class="chord-block-label">Chord Progressions</div>
+          <span class="chord-prog">Isus2 – bVII – bVI – bVII</span><span class="chord-prog">Im(maj7) – bVII – bVI – V</span>
+          <div class="chord-note">Avoid resolving V7→I — it feels too human. Let chords drift without landing anywhere.</div>
+        </div>
+        <div class="songs-block">
+          <div class="songs-block-label">Reference Songs</div>
+          <div class="song-row"><span class="song-title">John Williams — <em>Star Wars Main Theme</em></span><span class="song-links"><a class="song-link yt" href="https://www.youtube.com/results?search_query=John+Williams+Star+Wars+Main+Theme" target="_blank">Y</a><a class="song-link sp" href="https://open.spotify.com/track/7Hv8TALSqFGNXqpEsHVXBX" target="_blank">S</a></span></div>
+          <div class="song-row"><span class="song-title">David Bowie — <em>Space Oddity</em> 🎤</span><span class="song-links"><a class="song-link yt" href="https://www.youtube.com/results?search_query=David+Bowie+Space+Oddity" target="_blank">Y</a><a class="song-link sp" href="https://open.spotify.com/track/72Z17vmmeQKAg8bptWvpVG" target="_blank">S</a></span></div>
+          <div class="song-row"><span class="song-title">Vangelis — <em>Blade Runner Blues</em></span><span class="song-links"><a class="song-link yt" href="https://www.youtube.com/results?search_query=Vangelis+Blade+Runner+Blues" target="_blank">Y</a><a class="song-link sp" href="https://open.spotify.com/track/3PHsRcYDPCCLwMwVbzUTEY" target="_blank">S</a></span></div>
+        </div>
+      </div>
+
+      <div class="card mood-gold" data-genre="ragtime">
+        <span class="card-emoji">🎩</span>
+        <h3>Ragtime / Jazz Age</h3>
+        <div class="scene-tag">1920s party · Speakeasy · Comedy chase</div>
+        <div class="pill-row"><span class="pill key">Syncopated right hand</span><span class="pill instrument">Upright piano, Trombone, Clarinet</span><span class="pill keymode">🎹 F, C, Bb major</span></div>
+        <ul class="rule-list">
+          <li><span class="bullet">▸</span> Steady LH (octave–chord), syncopated RH</li>
+          <li><span class="bullet">▸</span> Bright tempo — dragging kills the feel</li>
+          <li><span class="bullet">▸</span> Secondary dominants: VI7, II7 in major keys</li>
+          <li><span class="bullet">▸</span> Glissando = punchline or chase moment</li>
+        </ul>
+        <div class="avoid-block"><div class="avoid-block-label">Avoid</div><p>Slow tempos, legato playing, or minor keys — dragging the tempo even slightly collapses the ragtime feel entirely.</p></div>
+        <div class="chord-block">
+          <div class="chord-block-label">Chord Progressions</div>
+          <span class="chord-prog">I – I7 – IV – iv – I – V7 – I</span><span class="chord-prog">I – VI7 – II7 – V7 – I</span>
+          <div class="chord-note">Secondary dominants (VI7, II7) are the ragtime signature — every chord pulls toward the next.</div>
+        </div>
+        <div class="songs-block">
+          <div class="songs-block-label">Reference Songs</div>
+          <div class="song-row"><span class="song-title">Scott Joplin — <em>Maple Leaf Rag</em></span><span class="song-links"><a class="song-link yt" href="https://www.youtube.com/results?search_query=Scott+Joplin+Maple+Leaf+Rag" target="_blank">Y</a><a class="song-link sp" href="https://open.spotify.com/track/3CDjnLmFhGEgjICefGRjGT" target="_blank">S</a></span></div>
+          <div class="song-row"><span class="song-title">Cab Calloway — <em>Minnie the Moocher</em> 🎤</span><span class="song-links"><a class="song-link yt" href="https://www.youtube.com/results?search_query=Cab+Calloway+Minnie+the+Moocher" target="_blank">Y</a><a class="song-link sp" href="https://open.spotify.com/track/61mXNQZPtqCS7jjM7b3Gv6" target="_blank">S</a></span></div>
+          <div class="song-row"><span class="song-title">Louis Armstrong — <em>When The Saints Go Marching In</em> 🎤</span><span class="song-links"><a class="song-link yt" href="https://www.youtube.com/results?search_query=Louis+Armstrong+When+The+Saints+Go+Marching+In" target="_blank">Y</a><a class="song-link sp" href="https://open.spotify.com/track/0oXfzJkajsseAFbxTIVwna" target="_blank">S</a></span></div>
+        </div>
+      </div>
+
+      <div class="card mood-teal" data-genre="romantic">
+        <span class="card-emoji">🎻</span>
+        <h3>Romantic / Melodrama</h3>
+        <div class="scene-tag">Love scene · Reunion · Emotional peak</div>
+        <div class="pill-row"><span class="pill key">Sweeping melody, rubato</span><span class="pill instrument">Strings, Piano, Cello</span><span class="pill keymode">🎹 Db, Ab, Eb major</span></div>
+        <ul class="rule-list">
+          <li><span class="bullet">▸</span> Rubato — bend tempo to the emotional weight</li>
+          <li><span class="bullet">▸</span> Rich 9th and 7th chords for depth</li>
+          <li><span class="bullet">▸</span> Ascend melodically as intensity builds</li>
+          <li><span class="bullet">▸</span> iv → I (minor 4 to major tonic) = tearjerker</li>
+        </ul>
+        <div class="avoid-block"><div class="avoid-block-label">Avoid</div><p>Staccato, steady metronomic tempo, or thin single-note lines — romance needs richness, sustain, and rhythmic flexibility.</p></div>
+        <div class="chord-block">
+          <div class="chord-block-label">Chord Progressions</div>
+          <span class="chord-prog">I – V – vi – IV</span><span class="chord-prog">vi – IV – I – V</span>
+          <div class="chord-note">The vi–IV–I–V variant starts on the sad side and lifts. Add iv (minor 4) before any final I for maximum heartache.</div>
+        </div>
+        <div class="songs-block">
+          <div class="songs-block-label">Reference Songs</div>
+          <div class="song-row"><span class="song-title">Morricone — <em>Cinema Paradiso Theme</em></span><span class="song-links"><a class="song-link yt" href="https://www.youtube.com/results?search_query=Morricone+Cinema+Paradiso+Theme" target="_blank">Y</a><a class="song-link sp" href="https://open.spotify.com/track/4p9HiBKVSdlqGDqfcnmUKL" target="_blank">S</a></span></div>
+          <div class="song-row"><span class="song-title">Chopin — <em>Nocturne Op. 9 No. 2</em></span><span class="song-links"><a class="song-link yt" href="https://www.youtube.com/results?search_query=Chopin+Nocturne+Op.+9+No.+2" target="_blank">Y</a><a class="song-link sp" href="https://open.spotify.com/track/6HXx5kARdnT1jFppRPWnNy" target="_blank">S</a></span></div>
+          <div class="song-row"><span class="song-title">Celine Dion — <em>My Heart Will Go On</em> 🎤</span><span class="song-links"><a class="song-link yt" href="https://www.youtube.com/results?search_query=Celine+Dion+My+Heart+Will+Go+On" target="_blank">Y</a><a class="song-link sp" href="https://open.spotify.com/track/3JvKfv6T31zO0ini8iNItO" target="_blank">S</a></span></div>
+        </div>
+      </div>
+
+      <div class="card mood-red" data-genre="latin">
+        <span class="card-emoji">💃</span>
+        <h3>Latin / Flamenco</h3>
+        <div class="scene-tag">Tango · Fiesta · Passion · Confrontation</div>
+        <div class="pill-row"><span class="pill key">Phrygian / Andalusian</span><span class="pill instrument">Classical guitar, Accordion, Castanets</span><span class="pill keymode">🎹 A min · E Phrygian dominant</span></div>
+        <ul class="rule-list">
+          <li><span class="bullet">▸</span> Flamenco: Phrygian dominant (1–b2–3–4–5–b6–b7) over E or A</li>
+          <li><span class="bullet">▸</span> Tango: sharp staccato chords, strong downbeat, dramatic pauses</li>
+          <li><span class="bullet">▸</span> Bossa nova: maj7 and 9 chords, gentle syncopation</li>
+          <li><span class="bullet">▸</span> Sudden stop then restart = instant flair</li>
+        </ul>
+        <div class="avoid-block"><div class="avoid-block-label">Avoid</div><p>Soft dynamics, plain major tonality, or metronomic evenness — Latin styles live in rhythmic sharpness and passionate extremes.</p></div>
+        <div class="chord-block">
+          <div class="chord-block-label">Chord Progressions</div>
+          <span class="chord-prog">i – bVII – bVI – V (Andalusian)</span><span class="chord-prog">im – ivm – V7 – im</span>
+          <div class="chord-note">The Andalusian cadence IS flamenco. Tango hammers the minor i–V7 tension harder and more staccato.</div>
+        </div>
+        <div class="songs-block">
+          <div class="songs-block-label">Reference Songs</div>
+          <div class="song-row"><span class="song-title">Piazzolla — <em>Libertango</em></span><span class="song-links"><a class="song-link yt" href="https://www.youtube.com/results?search_query=Piazzolla+Libertango" target="_blank">Y</a><a class="song-link sp" href="https://open.spotify.com/track/5LRnq6JJ8OcxKoJLo8X58C" target="_blank">S</a></span></div>
+          <div class="song-row"><span class="song-title">Carlos Gardel — <em>Por Una Cabeza</em> 🎤</span><span class="song-links"><a class="song-link yt" href="https://www.youtube.com/results?search_query=Carlos+Gardel+Por+Una+Cabeza" target="_blank">Y</a><a class="song-link sp" href="https://open.spotify.com/track/5ynC5ra22KIF57ues5YTB5" target="_blank">S</a></span></div>
+          <div class="song-row"><span class="song-title">João Gilberto — <em>The Girl from Ipanema</em> 🎤</span><span class="song-links"><a class="song-link yt" href="https://www.youtube.com/results?search_query=João+Gilberto+The+Girl+from+Ipanema" target="_blank">Y</a><a class="song-link sp" href="https://open.spotify.com/track/29xKs5IB9Fqr4YBFjCBl23" target="_blank">S</a></span></div>
+        </div>
+      </div>
+
+      <!-- 4 NEW GENRES -->
+
+      <div class="card mood-gold" data-genre="musical">
+        <span class="card-emoji">🎭</span>
+        <h3>Musical Theatre</h3>
+        <div class="scene-tag">Big number · Soliloquy · Showstopper</div>
+        <div class="pill-row"><span class="pill key">Full Broadway vamp</span><span class="pill instrument">Show piano, Strings, Brass</span><span class="pill keymode">🎹 C, F, Bb, G major</span></div>
+        <ul class="rule-list">
+          <li><span class="bullet">▸</span> "Vamp": repeat a 2–4 bar intro to set key and lock performers in</li>
+          <li><span class="bullet">▸</span> Strong downbeats, very clear harmonic rhythm (1–2 chords per bar)</li>
+          <li><span class="bullet">▸</span> Modulate up a half/whole step for the final chorus — always</li>
+          <li><span class="bullet">▸</span> Last chord: full register, fortissimo, held. Button everything.</li>
+        </ul>
+        <div class="avoid-block"><div class="avoid-block-label">Avoid</div><p>Tentative or quiet endings, vague harmonic rhythm, or skipping the final key modulation — musicals demand commitment and declaration.</p></div>
+        <div class="chord-block">
+          <div class="chord-block-label">Chord Progressions</div>
+          <span class="chord-prog">I – IV – V – I</span><span class="chord-prog">I – vi – ii – V7 – I</span>
+          <div class="chord-note">The "I–vi–ii–V" circle progression is the Broadway workhorse. Add chromatic passing chords between any two for flavor.</div>
+        </div>
+        <div class="songs-block">
+          <div class="songs-block-label">Reference Songs</div>
+          <div class="song-row"><span class="song-title">Sondheim — <em>Being Alive (Company)</em> 🎤</span><span class="song-links"><a class="song-link yt" href="https://www.youtube.com/results?search_query=Sondheim+Being+Alive+Company" target="_blank">Y</a><a class="song-link sp" href="https://open.spotify.com/track/6WPZUEJGjRWEBNFDf1DvbL" target="_blank">S</a></span></div>
+          <div class="song-row"><span class="song-title">Lloyd Webber — <em>Memory (Cats)</em> 🎤</span><span class="song-links"><a class="song-link yt" href="https://www.youtube.com/results?search_query=Lloyd+Webber+Memory+Cats" target="_blank">Y</a><a class="song-link sp" href="https://open.spotify.com/track/4JRMdBX5LoMLKh0nW3TN3T" target="_blank">S</a></span></div>
+          <div class="song-row"><span class="song-title">Kander &amp; Ebb — <em>All That Jazz (Chicago)</em> 🎤</span><span class="song-links"><a class="song-link yt" href="https://www.youtube.com/results?search_query=Kander+and+Ebb+All+That+Jazz+Chicago" target="_blank">Y</a><a class="song-link sp" href="https://open.spotify.com/track/4fcGF3bXXP1wR9hPFsJpQf" target="_blank">S</a></span></div>
+        </div>
+      </div>
+
+      <div class="card mood-rust" data-genre="cinematic">
+        <span class="card-emoji">🎬</span>
+        <h3>Cinematic / Film Score</h3>
+        <div class="scene-tag">Slow motion · Montage · Big reveal</div>
+        <div class="pill-row"><span class="pill key">Slow harmonic rhythm</span><span class="pill instrument">Orchestra, Piano, Choir, Synth</span><span class="pill keymode">🎹 A min · D min · any key</span></div>
+        <ul class="rule-list">
+          <li><span class="bullet">▸</span> Very long chords — sometimes 4–8 bars on one harmony</li>
+          <li><span class="bullet">▸</span> Ostinato in one hand, melody in the other</li>
+          <li><span class="bullet">▸</span> Dynamics do the narrative work: pp → fff over 16 bars</li>
+          <li><span class="bullet">▸</span> "Stinger": loud, sudden, dissonant chord on a reveal moment</li>
+        </ul>
+        <div class="avoid-block"><div class="avoid-block-label">Avoid</div><p>Fast harmonic rhythm or busy melodic runs — cinematic scoring is about space, swell, and the single perfectly-timed moment.</p></div>
+        <div class="chord-block">
+          <div class="chord-block-label">Chord Progressions</div>
+          <span class="chord-prog">i – bVI – bIII – bVII</span><span class="chord-prog">I – bVII – IV – I</span>
+          <div class="chord-note">The minor "i–bVI–bIII–bVII" is in nearly every modern blockbuster. Major "I–bVII–IV" sounds heroic yet uncertain — perfect for bittersweet moments.</div>
+        </div>
+        <div class="songs-block">
+          <div class="songs-block-label">Reference Songs</div>
+          <div class="song-row"><span class="song-title">Hans Zimmer — <em>Time (Inception)</em></span><span class="song-links"><a class="song-link yt" href="https://www.youtube.com/results?search_query=Hans+Zimmer+Time+Inception" target="_blank">Y</a><a class="song-link sp" href="https://open.spotify.com/track/6ZFbXIJkuI1dVNWvzJzown" target="_blank">S</a></span></div>
+          <div class="song-row"><span class="song-title">Adele — <em>Skyfall</em> 🎤</span><span class="song-links"><a class="song-link yt" href="https://www.youtube.com/results?search_query=Adele+Skyfall" target="_blank">Y</a><a class="song-link sp" href="https://open.spotify.com/track/4IKVDbCSBTODCjkrMuDcZT" target="_blank">S</a></span></div>
+          <div class="song-row"><span class="song-title">Max Richter — <em>On the Nature of Daylight</em></span><span class="song-links"><a class="song-link yt" href="https://www.youtube.com/results?search_query=Max+Richter+On+the+Nature+of+Daylight" target="_blank">Y</a><a class="song-link sp" href="https://open.spotify.com/track/1UqhkbzB0IqSQKFMZCnkYR" target="_blank">S</a></span></div>
+        </div>
+      </div>
+
+      <div class="card mood-pink" data-genre="soap">
+        <span class="card-emoji">😱</span>
+        <h3>Soap Opera / Telenovela</h3>
+        <div class="scene-tag">Revelation · Betrayal · Dramatic stare</div>
+        <div class="pill-row"><span class="pill key">Melodrama + stingers</span><span class="pill instrument">Strings, Piano, Organ stab</span><span class="pill keymode">🎹 F min · D min · any minor</span></div>
+        <ul class="rule-list">
+          <li><span class="bullet">▸</span> Sudden stinger chord on any revelation or slap</li>
+          <li><span class="bullet">▸</span> Slow, over-emotive string underscore on everything</li>
+          <li><span class="bullet">▸</span> "Dun dun DUN" = three ascending notes, last one held. Always works.</li>
+          <li><span class="bullet">▸</span> Hard stop → silence → resume louder = the freeze moment</li>
+        </ul>
+        <div class="avoid-block"><div class="avoid-block-label">Avoid</div><p>Subtlety, understatement, or quiet resolutions — soap opera emotion is always turned to 11. If in doubt, make it more dramatic.</p></div>
+        <div class="chord-block">
+          <div class="chord-block-label">Chord Progressions</div>
+          <span class="chord-prog">i – V7 – i (stinger)</span><span class="chord-prog">IV – V – vi (deceptive cadence)</span>
+          <div class="chord-note">The deceptive cadence (IV→V→vi) is the soap opera pivot: you expect I, but you land on vi (minor). Total shock — every time.</div>
+        </div>
+        <div class="songs-block">
+          <div class="songs-block-label">Reference Songs</div>
+          <div class="song-row"><span class="song-title">Barry DeVorzon — <em>Nadia's Theme (Y&amp;R)</em></span><span class="song-links"><a class="song-link yt" href="https://www.youtube.com/results?search_query=Barry+DeVorzon+Nadias+Theme+YandR" target="_blank">Y</a><a class="song-link sp" href="https://open.spotify.com/track/1EiJzgQRCMQAv8O2GF0lJB" target="_blank">S</a></span></div>
+          <div class="song-row"><span class="song-title">Whitney Houston — <em>I Will Always Love You</em> 🎤</span><span class="song-links"><a class="song-link yt" href="https://www.youtube.com/results?search_query=Whitney+Houston+I+Will+Always+Love+You" target="_blank">Y</a><a class="song-link sp" href="https://open.spotify.com/track/4eHbdreAnSOrDDsFfc4Fpm" target="_blank">S</a></span></div>
+          <div class="song-row"><span class="song-title">Various — <em>Dramatic soap opera stinger</em></span><span class="song-links"><a class="song-link yt" href="https://www.youtube.com/results?search_query=Various+Dramatic+soap+opera+stinger" target="_blank">Y</a><a class="song-link sp" href="https://open.spotify.com/track/1EiJzgQRCMQAv8O2GF0lJB" target="_blank">S</a></span></div>
+        </div>
+      </div>
+
+      <div class="card mood-pink" data-genre="sexy">
+        <span class="card-emoji">🌹</span>
+        <h3>Sexy / Sensual</h3>
+        <div class="scene-tag">Seduction · Slow burn · Tension</div>
+        <div class="pill-row"><span class="pill key">Slow minor groove</span><span class="pill instrument">Saxophone, Muted trumpet, Electric piano</span><span class="pill keymode">🎹 A min · D min · Dorian</span></div>
+        <ul class="rule-list">
+          <li><span class="bullet">▸</span> Slow tempo, syncopated — always slightly behind the beat</li>
+          <li><span class="bullet">▸</span> Minor 7 and 9 chords: lush, warm, unresolved</li>
+          <li><span class="bullet">▸</span> Bass note first, chord follows after a lazy half-beat</li>
+          <li><span class="bullet">▸</span> Stay on one chord far longer than expected — repetition IS seduction</li>
+        </ul>
+        <div class="avoid-block"><div class="avoid-block-label">Avoid</div><p>Bright major keys, staccato, fast tempos, or on-the-beat playing — anything crisp or energetic breaks the languid tension immediately.</p></div>
+        <div class="chord-block">
+          <div class="chord-block-label">Chord Progressions</div>
+          <span class="chord-prog">im9 – IV9 – im9 – V7sus</span><span class="chord-prog">i7 – bVII9 – bVI(maj7) – V7</span>
+          <div class="chord-note">The V7sus4 wants to resolve but doesn't. Stay on it uncomfortably long. That IS the feeling.</div>
+        </div>
+        <div class="songs-block">
+          <div class="songs-block-label">Reference Songs</div>
+          <div class="song-row"><span class="song-title">Marvin Gaye — <em>Let's Get It On</em></span><span class="song-links"><a class="song-link yt" href="https://www.youtube.com/results?search_query=Marvin+Gaye+Lets+Get+It+On" target="_blank">Y</a><a class="song-link sp" href="https://open.spotify.com/track/7tqhbajSfrz2F7E1Z75ASX" target="_blank">S</a></span></div>
+          <div class="song-row"><span class="song-title">Sade — <em>No Ordinary Love</em></span><span class="song-links"><a class="song-link yt" href="https://www.youtube.com/results?search_query=Sade+No+Ordinary+Love" target="_blank">Y</a><a class="song-link sp" href="https://open.spotify.com/track/3tKZuUvjrFpHBLmKfF2b8T" target="_blank">S</a></span></div>
+          <div class="song-row"><span class="song-title">Barry White — <em>Can't Get Enough of Your Love</em></span><span class="song-links"><a class="song-link yt" href="https://www.youtube.com/results?search_query=Barry+White+Cant+Get+Enough+of+Your+Love" target="_blank">Y</a><a class="song-link sp" href="https://open.spotify.com/track/7kyvDKmAlDCwA6AWbIDRun" target="_blank">S</a></span></div>
+        </div>
+      </div>
+
+      <div class="card mood-purple" data-genre="religious">
+        <span class="card-emoji">✝️</span>
+        <h3>Religious / Choir</h3>
+        <div class="scene-tag">Church · Funeral · Ceremony · Revelation</div>
+        <div class="pill-row"><span class="pill key">Hymn-style block chords</span><span class="pill instrument">Pipe organ, Choir, Strings, Bells</span><span class="pill keymode">🎹 C, F, G, Bb major</span></div>
+        <ul class="rule-list">
+          <li><span class="bullet">▸</span> Four-part hymn voicing: soprano melody on top, bass below, inner voices move minimally</li>
+          <li><span class="bullet">▸</span> Slow, steady tempo — no syncopation, no rubato; every beat is equal</li>
+          <li><span class="bullet">▸</span> "Amen" cadence (IV–I) as a phrase ending signals sacred space instantly</li>
+          <li><span class="bullet">▸</span> For gospel: add a swung feel, blue notes, and a call-and-response pattern in the right hand</li>
+          <li><span class="bullet">▸</span> Plagal cadence (IV→I) feels devotional; perfect cadence (V→I) feels more triumphant/conclusive</li>
+        </ul>
+        <div class="avoid-block"><div class="avoid-block-label">Avoid</div><p>Syncopation, jazzy voicings, or flashy runs in a sacred context — reverence comes from restraint. Save gospel energy for when the scene explicitly calls for it.</p></div>
+        <div class="chord-block">
+          <div class="chord-block-label">Chord Progressions</div>
+          <span class="chord-prog">I – IV – I – V – I (hymn)</span><span class="chord-prog">I – vi – IV – V – I</span>
+          <div class="chord-note">The plagal "Amen" (IV–I) is the single most recognizable sacred cue. For gospel, try I–I7–IV–iv–I with a swung 8th-note feel.</div>
+        </div>
+        <div class="songs-block">
+          <div class="songs-block-label">Reference Songs</div>
+          <div class="song-row"><span class="song-title">Handel — <em>Hallelujah Chorus (Messiah)</em></span><span class="song-links"><a class="song-link yt" href="https://www.youtube.com/results?search_query=Handel+Hallelujah+Chorus+Messiah" target="_blank">Y</a><a class="song-link sp" href="https://open.spotify.com/track/0OIqFCNUqfruNyBxjGLOlL" target="_blank">S</a></span></div>
+          <div class="song-row"><span class="song-title">Bach — <em>Jesu, Joy of Man's Desiring</em></span><span class="song-links"><a class="song-link yt" href="https://www.youtube.com/results?search_query=Bach+Jesu+Joy+of+Mans+Desiring" target="_blank">Y</a><a class="song-link sp" href="https://open.spotify.com/track/7kfuY06QDFNiFkFHRGT5U2" target="_blank">S</a></span></div>
+          <div class="song-row"><span class="song-title">Mahalia Jackson — <em>How Great Thou Art</em></span><span class="song-links"><a class="song-link yt" href="https://www.youtube.com/results?search_query=Mahalia+Jackson+How+Great+Thou+Art" target="_blank">Y</a><a class="song-link sp" href="https://open.spotify.com/track/3I56SJI9U1OQCYB7WoUjp2" target="_blank">S</a></span></div>
+        </div>
+      </div>
+
+    </div>
+  </div><!-- end genres -->
+
+  <!-- FEELINGS TAB -->
+  <div class="tab-panel" id="tab-feelings">
+    <p class="section-intro">When no genre is set, these emotional "colors" are your go-to palette. Each feeling has a core technique, chord progressions, and reference pieces. 🎤 = primarily vocal song.</p>
+    <div class="feeling-grid">
+
+      <div class="feeling-card" data-genre="comic">
+        <h4>😂 Comic / Silly</h4>
+        <div class="feeling-detail">
+          Bright major, staccato, slightly rushed. One wrong high note at the end = the joke.
+          <div class="pill-row" style="margin:0.4rem 0 0.2rem;"><span class="pill keymode">🎹 C, G, D major</span><span class="pill instrument">Upright piano, Xylophone, Tuba</span></div>
+          <strong>Core Trick</strong>
+          Play something perfectly normal, then add one jarring note. Mismatch IS the punchline.
+          <strong>Progressions</strong>
+          <span class="f-chord">I – I7 – IV – V</span><span class="f-chord">I – bVII – IV – I</span>
+          <strong>Listen To</strong>
+          Yakety Sax (Benny Hill theme) · Scott Joplin: The Entertainer · Weird Al Yankovic: <em>Any Song</em> 🎤
+          <strong>Avoid</strong>
+          Minor keys, legato, slow tempos, or anything that lingers emotionally.
+        </div>
+      </div>
+
+      <div class="feeling-card" data-genre="sad">
+        <h4>😢 Sad / Tender</h4>
+        <div class="feeling-detail">
+          Minor key, slow, legato. Dorian = wistful; natural minor = tragic.
+          <div class="pill-row" style="margin:0.4rem 0 0.2rem;"><span class="pill keymode">🎹 D min · A min · Dorian</span><span class="pill instrument">Strings, Cello, Soft piano</span></div>
+          <strong>Core Trick</strong>
+          Play melody with rubato — let certain notes linger. Silence between phrases = grief.
+          <strong>Progressions</strong>
+          <span class="f-chord">im – iv – bVII – III</span><span class="f-chord">im – bVI – bIII – V</span>
+          <strong>Listen To</strong>
+          Barber: Adagio for Strings · Radiohead: <em>Exit Music</em> 🎤 · Arvo Pärt: Spiegel im Spiegel
+          <strong>Avoid</strong>
+          Staccato, bright major keys, steady metronomic tempo, or busy right-hand activity.
+        </div>
+      </div>
+
+      <div class="feeling-card" data-genre="tense">
+        <h4>😨 Tense / Suspense</h4>
+        <div class="feeling-detail">
+          Repeat a low note, slowly increase density. The tritone is your best friend.
+          <div class="pill-row" style="margin:0.4rem 0 0.2rem;"><span class="pill keymode">🎹 Phrygian · diminished · chromatic</span><span class="pill instrument">Low strings, Bass piano, Organ</span></div>
+          <strong>Core Trick</strong>
+          Ostinato: one repeated low figure that never resolves. The brain waits — and doesn't get it.
+          <strong>Progressions</strong>
+          <span class="f-chord">i – viiø – i – viiø</span><span class="f-chord">i – bII – i – bII</span>
+          <strong>Listen To</strong>
+          Bernard Herrmann: Psycho strings · Jaws theme · Nine Inch Nails: <em>Something I Can Never Have</em> 🎤
+          <strong>Avoid</strong>
+          Resolving cadences (V→I), major tonality, or anything that feels like it "lands" — resolution kills tension dead.
+        </div>
+      </div>
+
+      <div class="feeling-card" data-genre="romance">
+        <h4>😍 Romance / Wonder</h4>
+        <div class="feeling-detail">
+          Slow arpeggios, major, lush 7th and 9th chords. Let melody float above.
+          <div class="pill-row" style="margin:0.4rem 0 0.2rem;"><span class="pill keymode">🎹 Db, Ab, Eb major</span><span class="pill instrument">Strings, Harp, Flute, Soft piano</span></div>
+          <strong>Core Trick</strong>
+          Sustain a chord, add melody note an octave above — creates yearning open space.
+          <strong>Progressions</strong>
+          <span class="f-chord">Imaj7 – V – vi – IVmaj7</span><span class="f-chord">I – iii – IV – I</span>
+          <strong>Listen To</strong>
+          Debussy: La Mer · Ravel: Pavane · Elvis Costello: <em>She</em> 🎤
+          <strong>Avoid</strong>
+          Staccato, busy rhythms, sharp attacks, or anything in a stark high register.
+        </div>
+      </div>
+
+      <div class="feeling-card" data-genre="action">
+        <h4>⚡ Urgent / Action</h4>
+        <div class="feeling-detail">
+          Fast 16th notes, driving bass, no rests. Keep harmony simple — no time for complexity.
+          <div class="pill-row" style="margin:0.4rem 0 0.2rem;"><span class="pill keymode">🎹 E min · B min</span><span class="pill instrument">Brass, Percussion, Full orchestra</span></div>
+          <strong>Core Trick</strong>
+          Repeated-note LH ostinato at speed. RH plays jabbing figures. Accelerate gradually.
+          <strong>Progressions</strong>
+          <span class="f-chord">i – VII – i – VII</span><span class="f-chord">i – v – i – VI – VII</span>
+          <strong>Listen To</strong>
+          Prokofiev: Montagues &amp; Capulets · Queen: <em>Don't Stop Me Now</em> 🎤 · Mission Impossible theme
+          <strong>Avoid</strong>
+          Rubato, slow harmonic changes, soft dynamics, or major keys — they drain urgency instantly.
+        </div>
+      </div>
+
+      <div class="feeling-card" data-genre="calm">
+        <h4>🧘 Calm / Contemplative</h4>
+        <div class="feeling-detail">
+          Very slow harmonic changes, wide voicings, open space. Let silence do the work.
+          <div class="pill-row" style="margin:0.4rem 0 0.2rem;"><span class="pill keymode">🎹 G, C major · Lydian</span><span class="pill instrument">Flute, Acoustic guitar, Vibraphone</span></div>
+          <strong>Core Trick</strong>
+          Single sustained chord in mid-register. Move just one note at a time, very slowly.
+          <strong>Progressions</strong>
+          <span class="f-chord">Isus2 – Isus4 – I – V</span><span class="f-chord">I – II – I – II (Lydian)</span>
+          <strong>Listen To</strong>
+          Satie: Gymnopédie No. 1 · Nick Drake: <em>Pink Moon</em> 🎤 · Brian Eno: Music for Airports
+          <strong>Avoid</strong>
+          Fast notes, dense chords, dissonance, or dramatic dynamic swings — they shatter contemplative stillness.
+        </div>
+      </div>
+
+      <div class="feeling-card" data-genre="anger">
+        <h4>😤 Anger / Confrontation</h4>
+        <div class="feeling-detail">
+          Heavy accents on downbeats, low register, minor key with tritones. Sudden dynamic spikes.
+          <div class="pill-row" style="margin:0.4rem 0 0.2rem;"><span class="pill keymode">🎹 Phrygian · Locrian · chromatic</span><span class="pill instrument">Low piano, Brass stabs, Timpani</span></div>
+          <strong>Core Trick</strong>
+          Minor i to bII (Neapolitan) hammered repeatedly — aggressive and unstable.
+          <strong>Progressions</strong>
+          <span class="f-chord">i – bII – i – bII</span><span class="f-chord">i – v – bVI – bVII – i</span>
+          <strong>Listen To</strong>
+          Beethoven: 5th Symphony opening · Rage Against the Machine: <em>Killing In the Name</em> 🎤 · Stravinsky: Rite of Spring
+          <strong>Avoid</strong>
+          Soft dynamics, arpeggios, major tonality, or anything melodically gentle — it completely undercuts the confrontation.
+        </div>
+      </div>
+
+      <div class="feeling-card" data-genre="triumph">
+        <h4>🎉 Triumph / Joy</h4>
+        <div class="feeling-detail">
+          Loud major chords, strong downbeat, brass sound. Picardy third (major ending) = victory punch.
+          <div class="pill-row" style="margin:0.4rem 0 0.2rem;"><span class="pill keymode">🎹 Eb, Bb, F major</span><span class="pill instrument">Brass, Strings, Full orchestra</span></div>
+          <strong>Core Trick</strong>
+          IV → I loud major. Final chord rings out. Completely predictable — that's why it works.
+          <strong>Progressions</strong>
+          <span class="f-chord">I – IV – V – I</span><span class="f-chord">bVII – IV – I (rock ending)</span>
+          <strong>Listen To</strong>
+          Beethoven: Ode to Joy · Queen: <em>We Are the Champions</em> 🎤 · John Williams: Raiders March
+          <strong>Avoid</strong>
+          Minor keys, unresolved chords, quiet dynamics, or trailing endings — triumph demands a loud, decisive landing.
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SONG GENRES TAB -->
+  <div class="tab-panel" id="tab-songgenres">
+    <p class="section-intro">Contemporary and popular song genres — useful when a scene calls for a specific musical world a real band might occupy. Progressions use Roman numerals. 🎤 = primarily vocal reference · <strong style="color:#cc0000">Y</strong> = YouTube · <strong style="color:#1db954">S</strong> = Spotify.</p>
+    <div class="card-grid">
+
+      <!-- ROCK -->
+      <div class="card mood-rust" data-genre="rock">
+        <span class="card-emoji">🎸</span>
+        <h3>Rock</h3>
+        <div class="scene-tag">Rebellion · Energy · Attitude · Angst</div>
+        <div class="pill-row"><span class="pill key">Power chords, strong backbeat</span><span class="pill instrument">Electric guitar, Bass, Drums</span><span class="pill keymode">🎹 E, A, D minor/major</span></div>
+        <ul class="rule-list">
+          <li><span class="bullet">▸</span> Heavy beats on 2 and 4 — the backbeat IS rock</li>
+          <li><span class="bullet">▸</span> Power chord (root + 5th, no 3rd) = instant grit; ambiguous major/minor</li>
+          <li><span class="bullet">▸</span> bVII chord is the rock signature — outside the key, always sounds right</li>
+          <li><span class="bullet">▸</span> Pentatonic minor scale for riffs; add the b5 blue note for edge</li>
+        </ul>
+        <div class="avoid-block"><div class="avoid-block-label">Avoid</div><p>Soft legato lines, jazz voicings, or delicate arpeggios — rock lives on attack, grit, and rhythmic punch.</p></div>
+        <div class="chord-block">
+          <div class="chord-block-label">Chord Progressions</div>
+          <span class="chord-prog">I – bVII – IV – I</span><span class="chord-prog">i – bVII – bVI – bVII</span>
+          <div class="chord-note">The bVII is the rock "money chord" — borrowed from parallel minor, sounds powerful in any context.</div>
+        </div>
+        <div class="songs-block">
+          <div class="songs-block-label">Reference Songs</div>
+          <div class="song-row"><span class="song-title">The Rolling Stones — <em>Jumpin' Jack Flash</em> 🎤</span><span class="song-links"><a class="song-link yt" href="https://www.youtube.com/results?search_query=The+Rolling+Stones+Jumpin+Jack+Flash" target="_blank">Y</a><a class="song-link sp" href="https://open.spotify.com/track/6g7qY7OAT0L1GD5NKqMlci" target="_blank">S</a></span></div>
+          <div class="song-row"><span class="song-title">AC/DC — <em>Highway to Hell</em> 🎤</span><span class="song-links"><a class="song-link yt" href="https://www.youtube.com/results?search_query=ACDC+Highway+to+Hell" target="_blank">Y</a><a class="song-link sp" href="https://open.spotify.com/track/7i7c8UuI0MZNS1bUdAyXBK" target="_blank">S</a></span></div>
+          <div class="song-row"><span class="song-title">Nirvana — <em>Come As You Are</em> 🎤</span><span class="song-links"><a class="song-link yt" href="https://www.youtube.com/results?search_query=Nirvana+Come+As+You+Are" target="_blank">Y</a><a class="song-link sp" href="https://open.spotify.com/track/0yRirBQc0wVITAMK7DRMAQ" target="_blank">S</a></span></div>
+        </div>
+      </div>
+
+      <!-- METAL -->
+      <div class="card mood-red" data-genre="metal">
+        <span class="card-emoji">🤘</span>
+        <h3>Metal</h3>
+        <div class="scene-tag">Intensity · Darkness · Power · Chaos</div>
+        <div class="pill-row"><span class="pill key">Low riffs, tritones, speed</span><span class="pill instrument">Distorted guitar, Bass, Drums</span><span class="pill keymode">🎹 E min · Phrygian · diminished</span></div>
+        <ul class="rule-list">
+          <li><span class="bullet">▸</span> Tritone (b5) interval is the "devil's interval" — pure metal darkness</li>
+          <li><span class="bullet">▸</span> Phrygian mode: i–bII hammered — the single most metal sound at a piano</li>
+          <li><span class="bullet">▸</span> Low register, heavy attack, almost no sustain on single notes</li>
+          <li><span class="bullet">▸</span> Sudden dynamic drops to nothing, then back to full force</li>
+        </ul>
+        <div class="avoid-block"><div class="avoid-block-label">Avoid</div><p>Anything polite, warm, or harmonically resolved — metal needs aggression, darkness, and relentless forward momentum.</p></div>
+        <div class="chord-block">
+          <div class="chord-block-label">Chord Progressions</div>
+          <span class="chord-prog">i – bII – i – bII</span><span class="chord-prog">i – bVI – bVII – i</span>
+          <div class="chord-note">Phrygian i–bII is instantly metal. The bVI–bVII–i resolution feels both inevitable and crushing.</div>
+        </div>
+        <div class="songs-block">
+          <div class="songs-block-label">Reference Songs</div>
+          <div class="song-row"><span class="song-title">Black Sabbath — <em>Iron Man</em> 🎤</span><span class="song-links"><a class="song-link yt" href="https://www.youtube.com/results?search_query=Black+Sabbath+Iron+Man" target="_blank">Y</a><a class="song-link sp" href="https://open.spotify.com/track/2RbsAbvFXjx6BVMtCMsP7J" target="_blank">S</a></span></div>
+          <div class="song-row"><span class="song-title">Metallica — <em>Enter Sandman</em> 🎤</span><span class="song-links"><a class="song-link yt" href="https://www.youtube.com/results?search_query=Metallica+Enter+Sandman" target="_blank">Y</a><a class="song-link sp" href="https://open.spotify.com/track/5FxD93fkSHoGTqm25NNUgP" target="_blank">S</a></span></div>
+          <div class="song-row"><span class="song-title">Rammstein — <em>Du Hast</em> 🎤</span><span class="song-links"><a class="song-link yt" href="https://www.youtube.com/results?search_query=Rammstein+Du+Hast" target="_blank">Y</a><a class="song-link sp" href="https://open.spotify.com/track/2c8JJRSIx5SWWN9xCaJJGQ" target="_blank">S</a></span></div>
+        </div>
+      </div>
+
+      <!-- FOLK -->
+      <div class="card mood-green" data-genre="folk">
+        <span class="card-emoji">🪕</span>
+        <h3>Folk</h3>
+        <div class="scene-tag">Storytelling · Simplicity · Nature · Community</div>
+        <div class="pill-row"><span class="pill key">Open chords, fingerpicked</span><span class="pill instrument">Acoustic guitar, Banjo, Fiddle, Mandolin</span><span class="pill keymode">🎹 G, D, C major · Mixolydian</span></div>
+        <ul class="rule-list">
+          <li><span class="bullet">▸</span> Simple diatonic chords — I, IV, V, and maybe vi. No fancy extensions</li>
+          <li><span class="bullet">▸</span> bVII chord (Mixolydian) gives an earthy, unresolved folk flavour</li>
+          <li><span class="bullet">▸</span> Fingerpicked arpeggios or alternating bass — never strummed block chords</li>
+          <li><span class="bullet">▸</span> Leave space — folk trusts silence and lets the lyric breathe</li>
+        </ul>
+        <div class="avoid-block"><div class="avoid-block-label">Avoid</div><p>Jazz extensions, complex rhythms, big dynamics, or dense textures — folk is intimate, honest, and stripped back.</p></div>
+        <div class="chord-block">
+          <div class="chord-block-label">Chord Progressions</div>
+          <span class="chord-prog">I – V – vi – IV</span><span class="chord-prog">I – bVII – IV – I</span>
+          <div class="chord-note">I–V–vi–IV is the universal folk/pop backbone. The Mixolydian bVII version gives a more ancient, rootsy feel.</div>
+        </div>
+        <div class="songs-block">
+          <div class="songs-block-label">Reference Songs</div>
+          <div class="song-row"><span class="song-title">Bob Dylan — <em>Blowin' in the Wind</em> 🎤</span><span class="song-links"><a class="song-link yt" href="https://www.youtube.com/results?search_query=Bob+Dylan+Blowin+in+the+Wind" target="_blank">Y</a><a class="song-link sp" href="https://open.spotify.com/track/0eGsygTp906u18L0Oimnem" target="_blank">S</a></span></div>
+          <div class="song-row"><span class="song-title">Simon &amp; Garfunkel — <em>The Sound of Silence</em> 🎤</span><span class="song-links"><a class="song-link yt" href="https://www.youtube.com/results?search_query=Simon+and+Garfunkel+The+Sound+of+Silence" target="_blank">Y</a><a class="song-link sp" href="https://open.spotify.com/track/3YfS47QufnLDFA71FUsgCM" target="_blank">S</a></span></div>
+          <div class="song-row"><span class="song-title">Joni Mitchell — <em>Big Yellow Taxi</em> 🎤</span><span class="song-links"><a class="song-link yt" href="https://www.youtube.com/results?search_query=Joni+Mitchell+Big+Yellow+Taxi" target="_blank">Y</a><a class="song-link sp" href="https://open.spotify.com/track/1rFDKyGYpqJBMSQ0pvj8g9" target="_blank">S</a></span></div>
+        </div>
+      </div>
+
+      <!-- JAZZ -->
+      <div class="card mood-blue" data-genre="jazz">
+        <span class="card-emoji">🎺</span>
+        <h3>Jazz</h3>
+        <div class="scene-tag">Sophistication · Cool · Late nights · Improvisation</div>
+        <div class="pill-row"><span class="pill key">ii–V–I, extensions, substitutions</span><span class="pill instrument">Piano, Double bass, Drums, Trumpet</span><span class="pill keymode">🎹 Bb, F, Eb major · Dorian</span></div>
+        <ul class="rule-list">
+          <li><span class="bullet">▸</span> ii7–V7–I is the core jazz move — play it in multiple keys rapidly</li>
+          <li><span class="bullet">▸</span> Add 7ths, 9ths, 11ths, 13ths to every chord — plain triads sound wrong</li>
+          <li><span class="bullet">▸</span> Swing feel: triplet-based 8th notes, long-short-long-short pattern</li>
+          <li><span class="bullet">▸</span> Comping: sparse, syncopated left hand; don't lock to a beat</li>
+        </ul>
+        <div class="avoid-block"><div class="avoid-block-label">Avoid</div><p>Plain triads, metronomic evenness, on-the-beat comping, or resolving every phrase — jazz breathes in the spaces.</p></div>
+        <div class="chord-block">
+          <div class="chord-block-label">Chord Progressions</div>
+          <span class="chord-prog">iim7 – V7 – Imaj7</span><span class="chord-prog">Imaj7 – vim7 – iim7 – V7</span>
+          <div class="chord-note">The ii–V–I is jazz DNA. The full turnaround (I–vi–ii–V) cycles endlessly — perfect for indefinite vamping.</div>
+        </div>
+        <div class="songs-block">
+          <div class="songs-block-label">Reference Songs</div>
+          <div class="song-row"><span class="song-title">Miles Davis — <em>Autumn Leaves</em></span><span class="song-links"><a class="song-link yt" href="https://www.youtube.com/results?search_query=Miles+Davis+Autumn+Leaves" target="_blank">Y</a><a class="song-link sp" href="https://open.spotify.com/track/3XL6MuDhCxnYTpWGpxDZWG" target="_blank">S</a></span></div>
+          <div class="song-row"><span class="song-title">Ella Fitzgerald — <em>Summertime</em> 🎤</span><span class="song-links"><a class="song-link yt" href="https://www.youtube.com/results?search_query=Ella+Fitzgerald+Summertime" target="_blank">Y</a><a class="song-link sp" href="https://open.spotify.com/track/3bMNZFIHOCCkE5KNPNKK10" target="_blank">S</a></span></div>
+          <div class="song-row"><span class="song-title">Dave Brubeck — <em>Take Five</em></span><span class="song-links"><a class="song-link yt" href="https://www.youtube.com/results?search_query=Dave+Brubeck+Take+Five" target="_blank">Y</a><a class="song-link sp" href="https://open.spotify.com/track/1YQWosTIljIvxAgHWTp7KP" target="_blank">S</a></span></div>
+        </div>
+      </div>
+
+      <!-- POP -->
+      <div class="card mood-pink" data-genre="pop">
+        <span class="card-emoji">🎤</span>
+        <h3>Pop</h3>
+        <div class="scene-tag">Catchy · Upbeat · Relatable · Commercial</div>
+        <div class="pill-row"><span class="pill key">Four-chord loop, hooks</span><span class="pill instrument">Piano, Synth, Programmed drums, Bass</span><span class="pill keymode">🎹 C, G, A, D major</span></div>
+        <ul class="rule-list">
+          <li><span class="bullet">▸</span> I–V–vi–IV is the universal pop loop — it literally works for hundreds of songs</li>
+          <li><span class="bullet">▸</span> Keep harmony simple and repetitive; the hook is everything</li>
+          <li><span class="bullet">▸</span> Strong four-on-the-floor pulse or clear backbeat — never ambiguous</li>
+          <li><span class="bullet">▸</span> Modulate up a half step for the final chorus — instant emotional lift</li>
+        </ul>
+        <div class="avoid-block"><div class="avoid-block-label">Avoid</div><p>Complex harmony, modal ambiguity, or long instrumental passages — pop is about the vocal hook above everything else.</p></div>
+        <div class="chord-block">
+          <div class="chord-block-label">Chord Progressions</div>
+          <span class="chord-prog">I – V – vi – IV</span><span class="chord-prog">vi – IV – I – V</span>
+          <div class="chord-note">These two progressions use exactly the same four chords, just starting from a different point. Recognisable from the first bar.</div>
+        </div>
+        <div class="songs-block">
+          <div class="songs-block-label">Reference Songs</div>
+          <div class="song-row"><span class="song-title">The Beatles — <em>Let It Be</em> 🎤</span><span class="song-links"><a class="song-link yt" href="https://www.youtube.com/results?search_query=The+Beatles+Let+It+Be" target="_blank">Y</a><a class="song-link sp" href="https://open.spotify.com/track/7iN1s7xHE4ifF5povM6A48" target="_blank">S</a></span></div>
+          <div class="song-row"><span class="song-title">Adele — <em>Someone Like You</em> 🎤</span><span class="song-links"><a class="song-link yt" href="https://www.youtube.com/results?search_query=Adele+Someone+Like+You" target="_blank">Y</a><a class="song-link sp" href="https://open.spotify.com/track/4kflIskMGSbrank7B6T1HU" target="_blank">S</a></span></div>
+          <div class="song-row"><span class="song-title">Journey — <em>Don't Stop Believin'</em> 🎤</span><span class="song-links"><a class="song-link yt" href="https://www.youtube.com/results?search_query=Journey+Dont+Stop+Believin" target="_blank">Y</a><a class="song-link sp" href="https://open.spotify.com/track/4bHsxqR3GMqZcQe2MusK9g" target="_blank">S</a></span></div>
+        </div>
+      </div>
+
+      <!-- SINGER-SONGWRITER -->
+      <div class="card mood-teal" data-genre="singersongwriter">
+        <span class="card-emoji">✍️</span>
+        <h3>Singer-Songwriter</h3>
+        <div class="scene-tag">Vulnerability · Introspection · Confessional · Intimate</div>
+        <div class="pill-row"><span class="pill key">Fingerstyle, open voicings</span><span class="pill instrument">Acoustic piano, Acoustic guitar, Cello</span><span class="pill keymode">🎹 C, G, E major · relative minors</span></div>
+        <ul class="rule-list">
+          <li><span class="bullet">▸</span> Sparse texture — one hand only is often enough; silence is intentional</li>
+          <li><span class="bullet">▸</span> Add 2nds and 4ths to chords (add9, sus2) for that open, unresolved feeling</li>
+          <li><span class="bullet">▸</span> Rubato is acceptable — follow the emotional arc, not the metronome</li>
+          <li><span class="bullet">▸</span> The melody is the voice; accompany beneath it, never compete with it</li>
+        </ul>
+        <div class="avoid-block"><div class="avoid-block-label">Avoid</div><p>Dense arrangements, steady metronomic pulse, or full block chords — the intimacy lives in restraint and space.</p></div>
+        <div class="chord-block">
+          <div class="chord-block-label">Chord Progressions</div>
+          <span class="chord-prog">Iadd9 – V – vi – IVadd9</span><span class="chord-prog">I – iii – IV – I</span>
+          <div class="chord-note">The add9 versions of I and IV give warmth without jazz complexity. iii (mediant) chord adds harmonic colour without going chromatic.</div>
+        </div>
+        <div class="songs-block">
+          <div class="songs-block-label">Reference Songs</div>
+          <div class="song-row"><span class="song-title">Carole King — <em>It's Too Late</em> 🎤</span><span class="song-links"><a class="song-link yt" href="https://www.youtube.com/results?search_query=Carole+King+Its+Too+Late" target="_blank">Y</a><a class="song-link sp" href="https://open.spotify.com/track/6JaJqVJgIFkxvEjF6vJkHZ" target="_blank">S</a></span></div>
+          <div class="song-row"><span class="song-title">Elliott Smith — <em>Between the Bars</em> 🎤</span><span class="song-links"><a class="song-link yt" href="https://www.youtube.com/results?search_query=Elliott+Smith+Between+the+Bars" target="_blank">Y</a><a class="song-link sp" href="https://open.spotify.com/track/0y9Dj6liPPJRfJ0CfGcNaD" target="_blank">S</a></span></div>
+          <div class="song-row"><span class="song-title">Nick Drake — <em>Northern Sky</em> 🎤</span><span class="song-links"><a class="song-link yt" href="https://www.youtube.com/results?search_query=Nick+Drake+Northern+Sky" target="_blank">Y</a><a class="song-link sp" href="https://open.spotify.com/track/3aRNtFJ6NFiRH4JHH55Jex" target="_blank">S</a></span></div>
+        </div>
+      </div>
+
+      <!-- ITPOP -->
+      <div class="card mood-gold" data-genre="itpop">
+        <span class="card-emoji">🇮🇹</span>
+        <h3>Itpop / Cantautorato</h3>
+        <div class="scene-tag">Bittersweet · Poetic · Mediterranean · Romance</div>
+        <div class="pill-row"><span class="pill key">Lush chords, melodic bass</span><span class="pill instrument">Piano, Acoustic guitar, Strings, Synth pad</span><span class="pill keymode">🎹 C, F, G major · relative minors</span></div>
+        <ul class="rule-list">
+          <li><span class="bullet">▸</span> Melancholy and beauty coexist — major key with minor vi or iv colours</li>
+          <li><span class="bullet">▸</span> Stepwise melodic bass lines under chords (like a cello countermelody)</li>
+          <li><span class="bullet">▸</span> Sustained piano chords with light arpeggiated guitar texture above</li>
+          <li><span class="bullet">▸</span> Chromatic passing chords and unexpected borrowed chords from parallel minor</li>
+        </ul>
+        <div class="avoid-block"><div class="avoid-block-label">Avoid</div><p>Hard rhythmic attacks, aggressive dynamics, or overly dense textures — itpop floats between sadness and warmth, never extreme.</p></div>
+        <div class="chord-block">
+          <div class="chord-block-label">Chord Progressions</div>
+          <span class="chord-prog">I – vi – IV – V</span><span class="chord-prog">I – V – iv – I</span>
+          <div class="chord-note">The minor iv (borrowed from parallel minor) dropped into a major key gives that distinctly Italian bittersweet pang — think Battiato or De André.</div>
+        </div>
+        <div class="songs-block">
+          <div class="songs-block-label">Reference Songs</div>
+          <div class="song-row"><span class="song-title">Franco Battiato — <em>Centro di Gravità Permanente</em> 🎤</span><span class="song-links"><a class="song-link yt" href="https://www.youtube.com/results?search_query=Franco+Battiato+Centro+di+Gravità+Permanente" target="_blank">Y</a><a class="song-link sp" href="https://open.spotify.com/track/6OzeWNA1SQgZBw5caqAIKN" target="_blank">S</a></span></div>
+          <div class="song-row"><span class="song-title">Lucio Battisti — <em>Emozioni</em> 🎤</span><span class="song-links"><a class="song-link yt" href="https://www.youtube.com/results?search_query=Lucio+Battisti+Emozioni" target="_blank">Y</a><a class="song-link sp" href="https://open.spotify.com/track/3B7plHFM2LK5BVYnwzkD3x" target="_blank">S</a></span></div>
+          <div class="song-row"><span class="song-title">Fabrizio De André — <em>La Canzone di Marinella</em> 🎤</span><span class="song-links"><a class="song-link yt" href="https://www.youtube.com/results?search_query=Fabrizio+De+André+La+Canzone+di+Marinella" target="_blank">Y</a><a class="song-link sp" href="https://open.spotify.com/track/4SMyc70qpCSIlVOq2EUQes" target="_blank">S</a></span></div>
+        </div>
+      </div>
+
+      <!-- FUNK / SOUL -->
+      <div class="card mood-gold" data-genre="funksoul">
+        <span class="card-emoji">🕺</span>
+        <h3>Funk / Soul</h3>
+        <div class="scene-tag">Groove · Swagger · Dancefloor · Joy</div>
+        <div class="pill-row"><span class="pill key">Tight 16th-note groove</span><span class="pill instrument">Rhodes piano, Bass, Horns, Drums</span><span class="pill keymode">🎹 E, A, D minor · Dorian</span></div>
+        <ul class="rule-list">
+          <li><span class="bullet">▸</span> The groove is everything — lock to a single chord for bars at a time</li>
+          <li><span class="bullet">▸</span> Dominant 9 chord (I9) is the funk tonic — never plain major or minor</li>
+          <li><span class="bullet">▸</span> Syncopate the bass line heavily: anticipate beats 2 and 4</li>
+          <li><span class="bullet">▸</span> Short, stabby chords on the off-beats (the "and" of beats)</li>
+        </ul>
+        <div class="avoid-block"><div class="avoid-block-label">Avoid</div><p>Long sustains, metronomic on-the-beat playing, or complex harmonic movement — funk is about rhythmic feel, not harmonic sophistication.</p></div>
+        <div class="chord-block">
+          <div class="chord-block-label">Chord Progressions</div>
+          <span class="chord-prog">I9 – IV9 – I9 – V9</span><span class="chord-prog">im7 – IV9 – im7 – bVII9</span>
+          <div class="chord-note">A single dominant 9th chord vamped for 8+ bars IS the groove. Add IV9 only when you need a brief lift.</div>
+        </div>
+        <div class="songs-block">
+          <div class="songs-block-label">Reference Songs</div>
+          <div class="song-row"><span class="song-title">James Brown — <em>I Got You (I Feel Good)</em> 🎤</span><span class="song-links"><a class="song-link yt" href="https://www.youtube.com/results?search_query=James+Brown+I+Got+You+I+Feel+Good" target="_blank">Y</a><a class="song-link sp" href="https://open.spotify.com/track/6y9lLhNTN96GJ28qSN5A2G" target="_blank">S</a></span></div>
+          <div class="song-row"><span class="song-title">Stevie Wonder — <em>Superstition</em> 🎤</span><span class="song-links"><a class="song-link yt" href="https://www.youtube.com/results?search_query=Stevie+Wonder+Superstition" target="_blank">Y</a><a class="song-link sp" href="https://open.spotify.com/track/1h7OIJmlRHBBGXXvOVGV4X" target="_blank">S</a></span></div>
+          <div class="song-row"><span class="song-title">Aretha Franklin — <em>Respect</em> 🎤</span><span class="song-links"><a class="song-link yt" href="https://www.youtube.com/results?search_query=Aretha+Franklin+Respect" target="_blank">Y</a><a class="song-link sp" href="https://open.spotify.com/track/7sFKyGCCQHkn9NmFuBMlXy" target="_blank">S</a></span></div>
+        </div>
+      </div>
+
+      <!-- REGGAE / SKA -->
+      <div class="card mood-green" data-genre="reggae">
+        <span class="card-emoji">🌴</span>
+        <h3>Reggae / Ska</h3>
+        <div class="scene-tag">Laid-back · Caribbean · Protest · Sunshine</div>
+        <div class="pill-row"><span class="pill key">Offbeat skank, one-drop</span><span class="pill instrument">Organ, Bass, Guitar, Drums</span><span class="pill keymode">🎹 A, D, G major/minor</span></div>
+        <ul class="rule-list">
+          <li><span class="bullet">▸</span> The "skank": short chords on beats 2 and 4 only — nothing on 1 and 3</li>
+          <li><span class="bullet">▸</span> Bass is the lead voice — melodic and prominent; chords are just decoration</li>
+          <li><span class="bullet">▸</span> Ska is the faster upstroke version: all 4 offbeats, bright and choppy</li>
+          <li><span class="bullet">▸</span> Keep it simple — I, IV, V, and the occasional minor vi</li>
+        </ul>
+        <div class="avoid-block"><div class="avoid-block-label">Avoid</div><p>On-the-beat chord playing, complex harmony, or rushing the tempo — reggae derives all its tension from what's held back.</p></div>
+        <div class="chord-block">
+          <div class="chord-block-label">Chord Progressions</div>
+          <span class="chord-prog">I – IV – V – IV</span><span class="chord-prog">i – VII – IV – V</span>
+          <div class="chord-note">Play each chord as a short offbeat stab. The bass carries the melodic motion; the piano/guitar simply marks the harmony.</div>
+        </div>
+        <div class="songs-block">
+          <div class="songs-block-label">Reference Songs</div>
+          <div class="song-row"><span class="song-title">Bob Marley — <em>No Woman, No Cry</em> 🎤</span><span class="song-links"><a class="song-link yt" href="https://www.youtube.com/results?search_query=Bob+Marley+No+Woman+No+Cry" target="_blank">Y</a><a class="song-link sp" href="https://open.spotify.com/track/2ywPCMjB08OqwlH8cHzMnA" target="_blank">S</a></span></div>
+          <div class="song-row"><span class="song-title">The Specials — <em>A Message to You Rudy</em> 🎤</span><span class="song-links"><a class="song-link yt" href="https://www.youtube.com/results?search_query=The+Specials+A+Message+to+You+Rudy" target="_blank">Y</a><a class="song-link sp" href="https://open.spotify.com/track/0mK6dNS7KSjnpQalklHGEj" target="_blank">S</a></span></div>
+          <div class="song-row"><span class="song-title">Jimmy Cliff — <em>The Harder They Come</em> 🎤</span><span class="song-links"><a class="song-link yt" href="https://www.youtube.com/results?search_query=Jimmy+Cliff+The+Harder+They+Come" target="_blank">Y</a><a class="song-link sp" href="https://open.spotify.com/track/6j3Uxoqm8bOYHTCGHVKYkZ" target="_blank">S</a></span></div>
+        </div>
+      </div>
+
+      <!-- BLUES -->
+      <div class="card mood-blue" data-genre="blues">
+        <span class="card-emoji">🎵</span>
+        <h3>Blues</h3>
+        <div class="scene-tag">Suffering · Release · Grit · Late night</div>
+        <div class="pill-row"><span class="pill key">12-bar, dominant 7ths, blue notes</span><span class="pill instrument">Piano, Harmonica, Electric guitar, Bass</span><span class="pill keymode">🎹 E, A, G major · pentatonic minor</span></div>
+        <ul class="rule-list">
+          <li><span class="bullet">▸</span> 12-bar form: I7 (4 bars) – IV7 (2) – I7 (2) – V7 – IV7 – I7 – V7</li>
+          <li><span class="bullet">▸</span> Every chord is a dominant 7th — even the I and IV, which would be "wrong" in classical</li>
+          <li><span class="bullet">▸</span> Blue notes: flatten the 3rd, 5th, and 7th for that bitter, bent sound</li>
+          <li><span class="bullet">▸</span> Shuffle feel: swing the 8th notes (long-short) at a medium walking tempo</li>
+        </ul>
+        <div class="avoid-block"><div class="avoid-block-label">Avoid</div><p>Plain major triads (too clean), fast tempos, or leaving out the dominant 7ths — blues needs grit, and that grit comes from the flat 7th.</p></div>
+        <div class="chord-block">
+          <div class="chord-block-label">Chord Progressions</div>
+          <span class="chord-prog">I7 – IV7 – I7 – V7</span><span class="chord-prog">i7 – iv7 – i7 – V7</span>
+          <div class="chord-note">The quick-change variant goes to IV in bar 2 instead of staying on I. The minor blues substitutes im7 throughout for a darker, moodier feel.</div>
+        </div>
+        <div class="songs-block">
+          <div class="songs-block-label">Reference Songs</div>
+          <div class="song-row"><span class="song-title">Robert Johnson — <em>Cross Road Blues</em> 🎤</span><span class="song-links"><a class="song-link yt" href="https://www.youtube.com/results?search_query=Robert+Johnson+Cross+Road+Blues" target="_blank">Y</a><a class="song-link sp" href="https://open.spotify.com/track/1R4dTcWYaWlLpRwMCXoKw5" target="_blank">S</a></span></div>
+          <div class="song-row"><span class="song-title">Muddy Waters — <em>Hoochie Coochie Man</em> 🎤</span><span class="song-links"><a class="song-link yt" href="https://www.youtube.com/results?search_query=Muddy+Waters+Hoochie+Coochie+Man" target="_blank">Y</a><a class="song-link sp" href="https://open.spotify.com/track/4FQm0V0z3tVPdInxvyXGc0" target="_blank">S</a></span></div>
+          <div class="song-row"><span class="song-title">Ray Charles — <em>What'd I Say</em> 🎤</span><span class="song-links"><a class="song-link yt" href="https://www.youtube.com/results?search_query=Ray+Charles+Whatd+I+Say" target="_blank">Y</a><a class="song-link sp" href="https://open.spotify.com/track/5TERTYpT8EXnRQCLH8U0hv" target="_blank">S</a></span></div>
+        </div>
+      </div>
+
+      <!-- ELECTRONIC / SYNTH-POP -->
+      <div class="card mood-purple" data-genre="electronic">
+        <span class="card-emoji">🎛️</span>
+        <h3>Electronic / Synth-pop</h3>
+        <div class="scene-tag">Futuristic · Dancefloor · Detached · Urban night</div>
+        <div class="pill-row"><span class="pill key">Repetitive loops, four-on-the-floor</span><span class="pill instrument">Synth, Drum machine, Bass synth</span><span class="pill keymode">🎹 A, D minor · Dorian · any key</span></div>
+        <ul class="rule-list">
+          <li><span class="bullet">▸</span> One or two chords, repeated relentlessly — repetition IS the aesthetic</li>
+          <li><span class="bullet">▸</span> Four-on-the-floor kick pattern with sparse syncopated synth stabs</li>
+          <li><span class="bullet">▸</span> Minor Dorian (natural 6th) sounds forward-moving and synthetic</li>
+          <li><span class="bullet">▸</span> Arpeggiated single notes over sustained chords — the classic synth arp</li>
+        </ul>
+        <div class="avoid-block"><div class="avoid-block-label">Avoid</div><p>Acoustic warmth, irregular rhythms, rubato, or complex chord changes — electronic music is precise, metronomic, and hypnotic.</p></div>
+        <div class="chord-block">
+          <div class="chord-block-label">Chord Progressions</div>
+          <span class="chord-prog">im – VII – im – VII</span><span class="chord-prog">im – bVII – IV – V</span>
+          <div class="chord-note">A two-chord loop (im–VII) can sustain a whole scene. Add the arp on top: single notes cycling through the chord tones in 16th notes.</div>
+        </div>
+        <div class="songs-block">
+          <div class="songs-block-label">Reference Songs</div>
+          <div class="song-row"><span class="song-title">Depeche Mode — <em>Personal Jesus</em> 🎤</span><span class="song-links"><a class="song-link yt" href="https://www.youtube.com/results?search_query=Depeche+Mode+Personal+Jesus" target="_blank">Y</a><a class="song-link sp" href="https://open.spotify.com/track/3cNBJJBqZGG1qPiEq3iF0z" target="_blank">S</a></span></div>
+          <div class="song-row"><span class="song-title">Giorgio Moroder — <em>Chase (Midnight Express)</em></span><span class="song-links"><a class="song-link yt" href="https://www.youtube.com/results?search_query=Giorgio+Moroder+Chase+Midnight+Express" target="_blank">Y</a><a class="song-link sp" href="https://open.spotify.com/track/0Mj0lL3vk5kJRoWMXFLPFN" target="_blank">S</a></span></div>
+          <div class="song-row"><span class="song-title">New Order — <em>Blue Monday</em> 🎤</span><span class="song-links"><a class="song-link yt" href="https://www.youtube.com/results?search_query=New+Order+Blue+Monday" target="_blank">Y</a><a class="song-link sp" href="https://open.spotify.com/track/1YINlCa9gMGDpSyABMcbJG" target="_blank">S</a></span></div>
+        </div>
+      </div>
+
+      <!-- HIP-HOP / R&B -->
+      <div class="card mood-purple" data-genre="hiphop">
+        <span class="card-emoji">🎧</span>
+        <h3>Hip-hop / R&amp;B</h3>
+        <div class="scene-tag">Swagger · Street · Emotion · Groove</div>
+        <div class="pill-row"><span class="pill key">Looped samples, heavy downbeat</span><span class="pill instrument">Rhodes, Bass, Drum machine, Synth</span><span class="pill keymode">🎹 F, C minor · Dorian · pentatonic</span></div>
+        <ul class="rule-list">
+          <li><span class="bullet">▸</span> Beat lands hard on 1; snare (or clap) on 2 and 4 — feel it before you play it</li>
+          <li><span class="bullet">▸</span> Loop a 2- or 4-bar progression and stay on it — variation comes from texture, not chords</li>
+          <li><span class="bullet">▸</span> R&amp;B: lush minor 9th and maj7 chords, slightly behind the beat, soulful</li>
+          <li><span class="bullet">▸</span> Hip-hop: sparse, wide-spaced voicings; leave the mid-range empty for the vocal</li>
+        </ul>
+        <div class="avoid-block"><div class="avoid-block-label">Avoid</div><p>Rushing, busy chord changes, or cluttered mid-register — the pocket comes from restraint, and the space is where the vocal lives.</p></div>
+        <div class="chord-block">
+          <div class="chord-block-label">Chord Progressions</div>
+          <span class="chord-prog">im9 – bVII – bVI – V7</span><span class="chord-prog">im7 – ivm7 – bVII – bVI</span>
+          <div class="chord-note">Minor 9th chords give warmth without tension. The bVI–V7 ending (or a deceptive stop on bVI) is classic R&amp;B heartbreak.</div>
+        </div>
+        <div class="songs-block">
+          <div class="songs-block-label">Reference Songs</div>
+          <div class="song-row"><span class="song-title">D'Angelo — <em>Brown Sugar</em> 🎤</span><span class="song-links"><a class="song-link yt" href="https://www.youtube.com/results?search_query=DAngelo+Brown+Sugar" target="_blank">Y</a><a class="song-link sp" href="https://open.spotify.com/track/6mO0VQg0CTTW7jkXpBhIca" target="_blank">S</a></span></div>
+          <div class="song-row"><span class="song-title">Kendrick Lamar — <em>These Walls</em> 🎤</span><span class="song-links"><a class="song-link yt" href="https://www.youtube.com/results?search_query=Kendrick+Lamar+These+Walls" target="_blank">Y</a><a class="song-link sp" href="https://open.spotify.com/track/56kwXqDisBBN0XBXxMVPCC" target="_blank">S</a></span></div>
+          <div class="song-row"><span class="song-title">Lauryn Hill — <em>Ex-Factor</em> 🎤</span><span class="song-links"><a class="song-link yt" href="https://www.youtube.com/results?search_query=Lauryn+Hill+Ex-Factor" target="_blank">Y</a><a class="song-link sp" href="https://open.spotify.com/track/3RFWqFNOOGM5XumxXUiOXa" target="_blank">S</a></span></div>
+        </div>
+      </div>
+
+
+      <!-- CHINESE -->
+      <div class="card mood-red" data-genre="chinese">
+        <span class="card-emoji">🐉</span>
+        <h3>Chinese / C-pop</h3>
+        <div class="scene-tag">Nostalgia · Romance · Ceremony · Drama</div>
+        <div class="pill-row"><span class="pill key">Pentatonic melody, lush harmony</span><span class="pill instrument">Erhu, Guqin, Piano, Strings</span><span class="pill keymode">🎹 D, G, A major · pentatonic</span></div>
+        <ul class="rule-list">
+          <li><span class="bullet">▸</span> Pentatonic scale (no 4th or 7th) is the instant Chinese signal — remove those two notes</li>
+          <li><span class="bullet">▸</span> Melody-first: accompany very lightly underneath a singing line</li>
+          <li><span class="bullet">▸</span> Ornamentation: grace notes and slides into the main note, imitate the erhu bow</li>
+          <li><span class="bullet">▸</span> For drama: sudden octave drops in the bass, then silence</li>
+        </ul>
+        <div class="avoid-block"><div class="avoid-block-label">Avoid</div><p>The 4th and 7th scale degrees — they collapse the pentatonic feel instantly. Also avoid busy Western harmony; this music breathes in open space.</p></div>
+        <div class="chord-block">
+          <div class="chord-block-label">Chord Progressions</div>
+          <span class="chord-prog">I – V – vi – III</span><span class="chord-prog">I – bVII – IV – I</span>
+          <div class="chord-note">Pentatonic means chords often float without a clear resolution. The I–V–vi–III cycle sounds both familiar and distinctly Asian in the right context.</div>
+        </div>
+        <div class="songs-block">
+          <div class="songs-block-label">Reference Songs</div>
+          <div class="song-row"><span class="song-title">Teresa Teng — <em>月亮代表我的心 (The Moon Represents My Heart)</em> 🎤</span><span class="song-links"><a class="song-link yt" href="https://www.youtube.com/results?search_query=Teresa+Teng+Moon+Represents+My+Heart" target="_blank">Y</a><a class="song-link sp" href="https://open.spotify.com/track/3Srw8isgDzmYsgwDi4MtbD" target="_blank">S</a></span></div>
+          <div class="song-row"><span class="song-title">Jay Chou — <em>七里香 (Qilixiang)</em> 🎤</span><span class="song-links"><a class="song-link yt" href="https://www.youtube.com/results?search_query=Jay+Chou+Qilixiang" target="_blank">Y</a><a class="song-link sp" href="https://open.spotify.com/track/3cq54IhiuLFHQEFGAFbNin" target="_blank">S</a></span></div>
+          <div class="song-row"><span class="song-title">Ryuichi Sakamoto — <em>Merry Christmas Mr. Lawrence</em></span><span class="song-links"><a class="song-link yt" href="https://www.youtube.com/results?search_query=Ryuichi+Sakamoto+Merry+Christmas+Mr+Lawrence" target="_blank">Y</a><a class="song-link sp" href="https://open.spotify.com/track/17oLsEzzlGFlrBKViCzmGc" target="_blank">S</a></span></div>
+        </div>
+      </div>
+
+      <!-- ITALIAN ANNI 80 -->
+      <div class="card mood-teal" data-genre="itanni80">
+        <span class="card-emoji">🇮🇹</span>
+        <h3>Italian Anni 80</h3>
+        <div class="scene-tag">Nostalgia · Passion · Arena rock · Summer</div>
+        <div class="pill-row"><span class="pill key">Driving synths, big chorus</span><span class="pill instrument">Synth, Electric guitar, Piano, Drums</span><span class="pill keymode">🎹 E, A, D minor/major</span></div>
+        <ul class="rule-list">
+          <li><span class="bullet">▸</span> Big, reverb-soaked piano chords — wide voicings, each chord a statement</li>
+          <li><span class="bullet">▸</span> Minor key with a major chorus — darkness gives way to release</li>
+          <li><span class="bullet">▸</span> Synth arpeggios or pulsing 8ths underneath give it the era's propulsion</li>
+          <li><span class="bullet">▸</span> Swell into the chorus: thicken texture, modulate up a third</li>
+        </ul>
+        <div class="avoid-block"><div class="avoid-block-label">Avoid</div><p>Understatement or dry sound — anni 80 Italian pop lives on emotion, reverb, and commitment. Play it like you mean it or it falls flat.</p></div>
+        <div class="chord-block">
+          <div class="chord-block-label">Chord Progressions</div>
+          <span class="chord-prog">i – bVI – bVII – i</span><span class="chord-prog">I – V – vi – IV</span>
+          <div class="chord-note">Verse in minor, chorus in relative major — the classic Vasco/Eros formula. The shift from minor to major is the emotional payoff.</div>
+        </div>
+        <div class="songs-block">
+          <div class="songs-block-label">Reference Songs</div>
+          <div class="song-row"><span class="song-title">Vasco Rossi — <em>Albachiara</em> 🎤</span><span class="song-links"><a class="song-link yt" href="https://www.youtube.com/results?search_query=Vasco+Rossi+Albachiara" target="_blank">Y</a><a class="song-link sp" href="https://open.spotify.com/track/5xBZz1dSUm1gMjl3UravF1" target="_blank">S</a></span></div>
+          <div class="song-row"><span class="song-title">Gianna Nannini — <em>America</em> 🎤</span><span class="song-links"><a class="song-link yt" href="https://www.youtube.com/results?search_query=Gianna+Nannini+America" target="_blank">Y</a><a class="song-link sp" href="https://open.spotify.com/track/44EjZ5bE6pl7bBQHVsGmgn" target="_blank">S</a></span></div>
+          <div class="song-row"><span class="song-title">Eros Ramazzotti — <em>Cose della vita</em> 🎤</span><span class="song-links"><a class="song-link yt" href="https://www.youtube.com/results?search_query=Eros+Ramazzotti+Cose+della+vita" target="_blank">Y</a><a class="song-link sp" href="https://open.spotify.com/track/7L93Qjqgh05ZuFflWWyTjN" target="_blank">S</a></span></div>
+        </div>
+      </div>
+
+      <!-- SAMBA -->
+      <div class="card mood-gold" data-genre="samba">
+        <span class="card-emoji">🥁</span>
+        <h3>Samba</h3>
+        <div class="scene-tag">Carnival · Joy · Brazil · Groove</div>
+        <div class="pill-row"><span class="pill key">Syncopated 2/4, forward drive</span><span class="pill instrument">Cavaquinho, Piano, Pandeiro, Bass</span><span class="pill keymode">🎹 G, D, F major · relative minors</span></div>
+        <ul class="rule-list">
+          <li><span class="bullet">▸</span> The samba feel lives on the "e" of beat 2 — anticipate the downbeat, never land on it</li>
+          <li><span class="bullet">▸</span> Bass: root on beat 1, 5th on the "and" of 2 — creates the characteristic lurch</li>
+          <li><span class="bullet">▸</span> Chords colour fast — often 1 or 2 per bar at medium tempo</li>
+          <li><span class="bullet">▸</span> Add dom7 and 6th chords freely: I7, IV6 — they give warmth without jazz complexity</li>
+        </ul>
+        <div class="avoid-block"><div class="avoid-block-label">Avoid</div><p>Even 8ths, slow tempos, or playing on the beat — samba's energy is entirely in anticipation and syncopation. On the beat is the one place you don't want to be.</p></div>
+        <div class="chord-block">
+          <div class="chord-block-label">Chord Progressions</div>
+          <span class="chord-prog">I – IV – V7 – I</span><span class="chord-prog">i – V7 – i – IV</span>
+          <div class="chord-note">Samba harmony is simple — the complexity is all rhythmic. Add a dom7 to any chord for colour. The i–V7 minor progression gives the more dramatic, Rio Carnaval feel.</div>
+        </div>
+        <div class="songs-block">
+          <div class="songs-block-label">Reference Songs</div>
+          <div class="song-row"><span class="song-title">Jorge Ben Jor — <em>Mas, Que Nada!</em> 🎤</span><span class="song-links"><a class="song-link yt" href="https://www.youtube.com/results?search_query=Jorge+Ben+Jor+Mas+Que+Nada" target="_blank">Y</a><a class="song-link sp" href="https://open.spotify.com/track/6Tv5UgrQmAWFVsfLPibDIz" target="_blank">S</a></span></div>
+          <div class="song-row"><span class="song-title">Cartola — <em>As Rosas Não Falam</em> 🎤</span><span class="song-links"><a class="song-link yt" href="https://www.youtube.com/results?search_query=Cartola+As+Rosas+Nao+Falam" target="_blank">Y</a><a class="song-link sp" href="https://open.spotify.com/track/0MMe6HyOCDo6GYBZZCwkyt" target="_blank">S</a></span></div>
+          <div class="song-row"><span class="song-title">Clara Nunes — <em>Conto de Areia</em> 🎤</span><span class="song-links"><a class="song-link yt" href="https://www.youtube.com/results?search_query=Clara+Nunes+Conto+de+Areia" target="_blank">Y</a><a class="song-link sp" href="https://open.spotify.com/track/64oT0Ni1ELHbcowApVk7ap" target="_blank">S</a></span></div>
+        </div>
+      </div>
+
+      <!-- RAP -->
+      <div class="card mood-purple" data-genre="rap">
+        <span class="card-emoji">🎙️</span>
+        <h3>Rap / Hip-hop (live)</h3>
+        <div class="scene-tag">Flow · Street · Storytelling · Swagger</div>
+        <div class="pill-row"><span class="pill key">Sparse loops, heavy downbeat</span><span class="pill instrument">Piano, Bass, Drum kit (kick+snare)</span><span class="pill keymode">🎹 F, C, G minor · pentatonic</span></div>
+        <ul class="rule-list">
+          <li><span class="bullet">▸</span> <strong>Drum kit on keys:</strong> low C = kick (beat 1 and 3), D = snare (beat 2 and 4), high Eb cluster = hi-hat 8ths — keep it sparse</li>
+          <li><span class="bullet">▸</span> Loop a 2-bar phrase and stay on it — variation is in texture, not chords</li>
+          <li><span class="bullet">▸</span> Bass line is melodic and syncopated, not just root notes</li>
+          <li><span class="bullet">▸</span> Leave the mid-register completely empty — that's where the vocal sits</li>
+        </ul>
+        <div class="avoid-block"><div class="avoid-block-label">Avoid</div><p>Busy right hand, fast chord changes, or playing on every beat — the power of a rap groove comes from what you don't play. Space is the point.</p></div>
+        <div class="chord-block">
+          <div class="chord-block-label">Chord Progressions</div>
+          <span class="chord-prog">im7 – bVII – bVI – bVII</span><span class="chord-prog">im – bIII – bVII – IV</span>
+          <div class="chord-note">One chord per two bars is common — the loop is the feel. Minor 7ths add warmth. The bIII–bVII move (e.g. Eb–Bb in C minor) is the classic East Coast boom-bap sound.</div>
+        </div>
+        <div class="songs-block">
+          <div class="songs-block-label">Reference Songs</div>
+          <div class="song-row"><span class="song-title">The Notorious B.I.G. — <em>Juicy</em> 🎤</span><span class="song-links"><a class="song-link yt" href="https://www.youtube.com/results?search_query=Notorious+BIG+Juicy" target="_blank">Y</a><a class="song-link sp" href="https://open.spotify.com/track/2AP7m2dBb8ULTx4Gc1rdMc" target="_blank">S</a></span></div>
+          <div class="song-row"><span class="song-title">Kendrick Lamar — <em>HUMBLE.</em> 🎤</span><span class="song-links"><a class="song-link yt" href="https://www.youtube.com/results?search_query=Kendrick+Lamar+HUMBLE" target="_blank">Y</a><a class="song-link sp" href="https://open.spotify.com/track/7KXjTSCq5nL1LoYtL7XAwS" target="_blank">S</a></span></div>
+          <div class="song-row"><span class="song-title">N.W.A — <em>Straight Outta Compton</em> 🎤</span><span class="song-links"><a class="song-link yt" href="https://www.youtube.com/results?search_query=NWA+Straight+Outta+Compton" target="_blank">Y</a><a class="song-link sp" href="https://open.spotify.com/track/1W4zC5bmuCIZ5zpxAZojC9" target="_blank">S</a></span></div>
+        </div>
+      </div>
+
+      <!-- JAPANESE -->
+      <div class="card mood-pink" data-genre="japanese">
+        <span class="card-emoji">🌸</span>
+        <h3>Japanese / J-pop</h3>
+        <div class="scene-tag">Anime · Emotion · City night · Kawaii</div>
+        <div class="pill-row"><span class="pill key">Lush harmony, emotional melody</span><span class="pill instrument">Piano, Synth, Strings, Koto</span><span class="pill keymode">🎹 A, E, D major · pentatonic · Dorian</span></div>
+        <ul class="rule-list">
+          <li><span class="bullet">▸</span> Unexpected chord moves are the signature: I → bVII or I → bVI without preparation</li>
+          <li><span class="bullet">▸</span> The IV → I ("Amen") feels devotional here; add maj7 for J-pop warmth</li>
+          <li><span class="bullet">▸</span> Traditional feel: koto-like plucked pentatonic in the right hand, sparse bass</li>
+          <li><span class="bullet">▸</span> Anime/drama: sudden dynamic drop to solo piano — huge emotional impact</li>
+        </ul>
+        <div class="avoid-block"><div class="avoid-block-label">Avoid</div><p>Straightforward Western cadences — J-pop's beauty is in the harmonic detours. A chord that "shouldn't" work often creates the most memorable moment.</p></div>
+        <div class="chord-block">
+          <div class="chord-block-label">Chord Progressions</div>
+          <span class="chord-prog">I – V – bVII – IV</span><span class="chord-prog">vi – IV – I – V</span>
+          <div class="chord-note">The I–V–bVII–IV (borrowed bVII) is the J-pop fingerprint — major key with a Mixolydian detour that feels both bright and wistful. The vi–IV–I–V variant is the emotional ballad backbone.</div>
+        </div>
+        <div class="songs-block">
+          <div class="songs-block-label">Reference Songs</div>
+          <div class="song-row"><span class="song-title">Hikaru Utada — <em>First Love</em> 🎤</span><span class="song-links"><a class="song-link yt" href="https://www.youtube.com/results?search_query=Hikaru+Utada+First+Love" target="_blank">Y</a><a class="song-link sp" href="https://open.spotify.com/track/39HrUxcvKF3jtLz7fUDWXc" target="_blank">S</a></span></div>
+          <div class="song-row"><span class="song-title">Ryuichi Sakamoto — <em>Merry Christmas Mr. Lawrence</em></span><span class="song-links"><a class="song-link yt" href="https://www.youtube.com/results?search_query=Ryuichi+Sakamoto+Merry+Christmas+Mr+Lawrence" target="_blank">Y</a><a class="song-link sp" href="https://open.spotify.com/track/17oLsEzzlGFlrBKViCzmGc" target="_blank">S</a></span></div>
+          <div class="song-row"><span class="song-title">Hikaru Utada — <em>traveling</em> 🎤</span><span class="song-links"><a class="song-link yt" href="https://www.youtube.com/results?search_query=Hikaru+Utada+traveling" target="_blank">Y</a><a class="song-link sp" href="https://open.spotify.com/track/3pGhLh0YYYROJpN5GHfn5t" target="_blank">S</a></span></div>
+        </div>
+      </div>
+
+      <!-- ARABIC -->
+      <div class="card mood-gold" data-genre="arabic">
+        <span class="card-emoji">🌙</span>
+        <h3>Arabic / Maqam</h3>
+        <div class="scene-tag">Desert · Romance · Ceremony · Melancholy</div>
+        <div class="pill-row"><span class="pill key">Maqam scales, ornamental melody</span><span class="pill instrument">Oud, Qanun, Violin, Riq</span><span class="pill keymode">🎹 D, A, E — Hijaz · Rast · Bayati</span></div>
+        <ul class="rule-list">
+          <li><span class="bullet">▸</span> <strong>Hijaz (most recognisable):</strong> semitone–augmented 2nd–semitone — on D: D Eb F# G A Bb C D</li>
+          <li><span class="bullet">▸</span> The augmented 2nd (e.g. Eb→F#) is the single most "Arabic" interval — use it in melody</li>
+          <li><span class="bullet">▸</span> Ornament everything: trills, grace notes, and slides between notes imitate the oud</li>
+          <li><span class="bullet">▸</span> Rhythm: long–short–short (maqsum) or long–long–short (masmoudi) patterns; always feel the pulse</li>
+        </ul>
+        <div class="avoid-block"><div class="avoid-block-label">Avoid</div><p>Western harmony and chord progressions — Arabic music is modal and melodic, not harmonic. A single held bass note under an ornate melody is more authentic than any chord sequence.</p></div>
+        <div class="chord-block">
+          <div class="chord-block-label">Chord Progressions</div>
+          <span class="chord-prog">i – bII – i – V</span><span class="chord-prog">i – IV – bII – i</span>
+          <div class="chord-note">These are simplified Western approximations — true maqam is modal, not chord-based. The bII (Neapolitan) creates the Hijaz tension. Treat these as bass pedal + melody, not block chords.</div>
+        </div>
+        <div class="songs-block">
+          <div class="songs-block-label">Reference Songs</div>
+          <div class="song-row"><span class="song-title">Umm Kulthum — <em>Enta Omri</em> 🎤</span><span class="song-links"><a class="song-link yt" href="https://www.youtube.com/results?search_query=Umm+Kulthum+Enta+Omri" target="_blank">Y</a><a class="song-link sp" href="https://open.spotify.com/track/0ivlkHUXmRfJWT3RwQuBcz" target="_blank">S</a></span></div>
+          <div class="song-row"><span class="song-title">Fairuz — <em>Nassam Alayna El Hawa</em> 🎤</span><span class="song-links"><a class="song-link yt" href="https://www.youtube.com/results?search_query=Fairuz+Nassam+Alayna+El+Hawa" target="_blank">Y</a><a class="song-link sp" href="https://open.spotify.com/track/4d7DrWvGPobIFPRi84gjm0" target="_blank">S</a></span></div>
+          <div class="song-row"><span class="song-title">Abdel Halim Hafez — <em>Khosara</em> 🎤</span><span class="song-links"><a class="song-link yt" href="https://www.youtube.com/results?search_query=Abdel+Halim+Hafez+Khosara" target="_blank">Y</a><a class="song-link sp" href="https://open.spotify.com/track/7ARcyOFkFaw7dcvlaiw3v4" target="_blank">S</a></span></div>
+        </div>
+      </div>
+
+    </div>
+  </div><!-- end song genres -->
+
+  <!-- INSTRUMENTS TAB -->
+  <div class="tab-panel" id="tab-instruments">
+    <p class="section-intro">Your keyboard's instrument list is your costume rack. Choosing the right timbre before playing a note already tells the audience where they are.</p>
+    <table class="ref-table">
+      <thead><tr><th>Instrument Sound</th><th>Immediate Association</th><th>Best Scenes</th><th>Watch Out</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Honky-tonk / Upright piano</strong></td><td>Old West, 1920s saloon, vaudeville</td><td>Comedy, period pieces, bar scenes</td><td>Establish it fast, then drop to normal piano</td></tr>
+        <tr><td><strong>Pipe organ</strong></td><td>Church, gothic horror, grandeur</td><td>Villain entrance, ceremony, death</td><td>Slow sustain — play chords slightly early to land on time</td></tr>
+        <tr><td><strong>Strings / Pads</strong></td><td>Film score, emotional depth, luxury</td><td>Romance, drama, slow-burn scenes</td><td>Slow attack — anticipate chord changes</td></tr>
+        <tr><td><strong>Flute / Recorder</strong></td><td>Nature, innocence, medieval, pastoral</td><td>Forest, children, ancient settings</td><td>Sounds thin for loud/dramatic moments</td></tr>
+        <tr><td><strong>Trumpet / Brass</strong></td><td>Fanfare, military, heroism, jazz</td><td>Announcements, battles, triumph</td><td>Aggressive — don't use for quiet intimate scenes</td></tr>
+        <tr><td><strong>Accordion</strong></td><td>France, Eastern Europe, carnival, tango</td><td>Paris cafés, immigrant stories, polka</td><td>Very specific — commits you to a location strongly</td></tr>
+        <tr><td><strong>Saxophone / Muted trumpet</strong></td><td>Jazz, noir, sensuality, late-night bar</td><td>Seduction scenes, 1950s settings, cool characters</td><td>Very evocative — commits to a mood instantly</td></tr>
+        <tr><td><strong>Synth lead / Theremin</strong></td><td>Sci-fi, retro horror, alien</td><td>Space, robots, uncanny moments</td><td>Can read as comedy — use sparingly for true sci-fi</td></tr>
+        <tr><td><strong>Harpsichord</strong></td><td>Baroque, aristocracy, intrigue</td><td>Period dramas, court scenes, witty banter</td><td>No dynamics — very sharp and brittle, can feel cold</td></tr>
+        <tr><td><strong>Steel drum</strong></td><td>Caribbean, tropical, carefree</td><td>Beach, vacation, relaxed comedy</td><td>Impossible to play sad in — commits to lightness</td></tr>
+        <tr><td><strong>Music box / Celesta</strong></td><td>Childhood, fairy tale, nostalgia, eeriness</td><td>Memory sequences, surreal moments</td><td>Very specific range — use for contrast, not default</td></tr>
+        <tr><td><strong>Classic piano</strong></td><td>Neutral / universal</td><td>Any scene — your safe default</td><td>Can feel underdressed; add genre signals</td></tr>
+        <tr><td><strong>Nylon / Classical guitar</strong></td><td>Romance, Spain, intimacy, folk</td><td>Love scenes, Mediterranean settings</td><td>Slow attack similar to strings — anticipate your changes</td></tr>
+        <tr><td><strong>Choir / Pad voices</strong></td><td>Sacred, ethereal, epic, otherworldly</td><td>Religious scenes, big reveals, fantasy</td><td>Overpowers everything — use sparingly and quietly</td></tr>
+      </tbody>
+    </table>
+    <div class="big-quote">"The instrument you choose is a costume. You're dressing the scene before you play a single note."</div>
+  </div>
+
+  <!-- TRANSITIONS TAB -->
+  <div class="tab-panel" id="tab-transitions">
+    <p class="section-intro">Improv demands instant pivots. These are your practical tools for shifting the music when the scene changes.</p>
+    <h2 class="section-title">Genre / Mood Pivots</h2>
+    <div class="principles">
+      <div class="principle"><h4>The Edit Signal</h4><p>When a scene ends, land on a clear tonic chord and let it ring. Silence + pause = "scene over." Don't trail off ambiguously — make the ending deliberate.</p></div>
+      <div class="principle"><h4>The Pivot Chord</h4><p>Some chords exist in multiple keys. C major to A minor: an E minor chord works in both — play it, then re-harmonize. Shift mood without a hard cut.</p></div>
+      <div class="principle"><h4>Texture Shift</h4><p>Change what you're doing without changing key. Arpeggios → block chords, or legato → staccato signals the scene has changed gear. Useful when you don't know where they're going yet.</p></div>
+      <div class="principle"><h4>Half-Step Up</h4><p>Modulating up a half step mid-phrase = instant escalation. Use it when you see the scene about to explode. It sounds exactly like the movie moment kicking in.</p></div>
+      <div class="principle"><h4>The Slow Burn</h4><p>Gradually slow tempo and drop volume to signal an intimate or introspective turn. Audiences follow tempo closely — they'll physically quiet down with you.</p></div>
+      <div class="principle"><h4>Sudden Stop</h4><p>A hard stop on a dissonant note (diminished chord) reads as: something has gone terribly wrong. Very useful for reversals or shock moments. Then silence.</p></div>
+    </div>
+    <h2 class="section-title" style="margin-top:2rem;">Staying in the Scene</h2>
+    <div class="principles">
+      <div class="principle"><h4>The Underscore Default</h4><p>When unsure, play a long, soft, slow sustained chord in a neutral register. It says "something is happening" without committing to a genre. Buy yourself four bars to read the scene.</p></div>
+      <div class="principle"><h4>Follow the Body, Not the Words</h4><p>Physicality usually leads dialogue in improv. When someone slouches and slows down, drop the music before they say a sad line. You'll seem prescient.</p></div>
+      <div class="principle"><h4>Mirror Volume to Stage Energy</h4><p>Two people whispering? Drop to nearly nothing. A big group scene? Fill the room. Let the stage's dynamic range tell you how loud to be.</p></div>
+      <div class="principle"><h4>Leave Space for Laughs</h4><p>When comedy lands, briefly stop or drop to just a hint of sound. Continuing over laughter muffles it and kills the moment. Resume as the wave subsides.</p></div>
+    </div>
+  </div>
+
+  <!-- PRINCIPLES TAB -->
+  <div class="tab-panel" id="tab-principles">
+    <p class="section-intro">You already know improv's foundational rules. Here's how they translate directly into the musician's chair.</p>
+    <div class="big-quote">"You're not accompanying a scene. You're a scene partner who speaks only in music."</div>
+    <div class="principles">
+      <div class="principle"><h4>Yes, And — in music</h4><p>If a performer establishes a Western scene and you're playing noir jazz, you're blocking them. Accept what they've set and add to it. Commit immediately to what the stage tells you.</p></div>
+      <div class="principle"><h4>Don't Comment — Support</h4><p>Resist the urge to be clever. If someone says "I'm so happy," you don't need to play ironic minor. Play happy. The ensemble's coherence is the art form.</p></div>
+      <div class="principle"><h4>The Musician as Narrator</h4><p>You can signal time jumps, location changes, and emotional states before they're spoken. Use this sparingly — a stinger or theme change is powerful precisely because it's rare.</p></div>
+      <div class="principle"><h4>Economy of Notes</h4><p>The most common beginner mistake is playing too much. A single sustained bass note says more than a busy right-hand run. Let rests breathe. Space is musical punctuation.</p></div>
+      <div class="principle"><h4>Tempo Is Emotion</h4><p>Before melody or harmony, tempo sends the signal. Fast = energy, comedy, action, anxiety. Slow = intimacy, sadness, gravity, dread. Get the tempo right first; everything else can be rough.</p></div>
+      <div class="principle"><h4>Strong Initiations</h4><p>Choose something specific and commit in the first two seconds. A bold choice that's slightly wrong beats vague neutrality — the performers will adapt to you.</p></div>
+      <div class="principle"><h4>The Emotional Offer</h4><p>Sometimes you're not reflecting the scene — you're offering a gift. A mysterious musical phrase as a performer enters a space gives them an emotion to play with. It's an "offer" in improv terms.</p></div>
+      <div class="principle"><h4>Reading the Room</h4><p>Watch the audience, not just the performers. If laughs are slow to land, the tempo might need lifting. If everyone's leaning forward in silence, sustain that — don't break it with a music joke.</p></div>
+      <div class="principle"><h4>The Rule of Two Hands</h4><p>Under stress you'll revert to what's automatic. Practice five specific patterns (waltz bass, staccato march, noir ostinato, romantic arpeggios, action ostinato) until they're physically automatic.</p></div>
+      <div class="principle"><h4>Give the Button</h4><p>When an actor goes for a button (the closing punchline), hit a musical button with them — a sharp chord, a glissando, a sting. Practice listening for the physical "button gesture" and matching it instantly.</p></div>
+    </div>
+    <div class="big-quote">"The best improv music is invisible when it's working — and obvious when it's not."</div>
+  </div>
+
+</div>
+
+<script>
+  /* ─── Tab nav ─────────────────────────────────────────── */
+  function showTab(id, btn) {
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('tab-' + id).classList.add('active');
+    btn.classList.add('active');
+  }
+
+  /* ─── Web Audio engine ────────────────────────────────── */
+  let audioCtx = null;
+  function getCtx() {
+    if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    if (audioCtx.state === 'suspended') audioCtx.resume();
+    return audioCtx;
+  }
+
+  // Clamp any scheduled time to never be in the past
+  function safeTime(t) {
+    return Math.max(t, audioCtx.currentTime + 0.002);
+  }
+
+  /* Convert note name to MIDI number */
+  const NOTE_MAP = {C:0,'C#':1,Db:1,D:2,'D#':3,Eb:3,E:4,F:5,'F#':6,Gb:6,G:7,'G#':8,Ab:8,A:9,'A#':10,Bb:10,B:11};
+  function midiToHz(midi) { return 440 * Math.pow(2, (midi - 69) / 12); }
+
+  /* ── Timbre definitions ───────────────────────────────── */
+  // Each timbre: { type, attackTime, decayTime, sustainLevel, releaseTime, detune, harmonics, vibrato }
+  const TIMBRES = {
+    piano:    { osc:'triangle', atk:0.01, dec:0.3,  sus:0.3,  rel:1.2,  harmonics:[1,0.5,0.25,0.12], vibrato:0 },
+    organ:    { osc:'sine',     atk:0.02, dec:0.01, sus:0.9,  rel:0.15, harmonics:[1,0.8,0.6,0.4,0.2], vibrato:0.3 },
+    strings:  { osc:'sawtooth', atk:0.25, dec:0.1,  sus:0.7,  rel:0.8,  harmonics:[1,0.4,0.2], vibrato:0.8 },
+    pluck:    { osc:'triangle', atk:0.005,dec:0.4,  sus:0.1,  rel:0.6,  harmonics:[1,0.6,0.2,0.05], vibrato:0 },
+    brass:    { osc:'sawtooth', atk:0.05, dec:0.1,  sus:0.8,  rel:0.2,  harmonics:[1,0.7,0.5,0.3,0.1], vibrato:0.2 },
+    pad:      { osc:'sine',     atk:0.5,  dec:0.2,  sus:0.8,  rel:1.5,  harmonics:[1,0.6,0.3,0.15], vibrato:0.5 },
+    honkytonk:{ osc:'triangle', atk:0.01, dec:0.2,  sus:0.3,  rel:0.8,  harmonics:[1,0.55,0.3,0.15], vibrato:0, detune:18 },
+    marimba:  { osc:'sine',     atk:0.005,dec:0.5,  sus:0.05, rel:0.3,  harmonics:[1,0.3,0.05], vibrato:0 },
+    flute:    { osc:'sine',     atk:0.08, dec:0.05, sus:0.7,  rel:0.3,  harmonics:[1,0.15,0.05], vibrato:1.2 },
+    pizzicato:{ osc:'triangle', atk:0.005,dec:0.25, sus:0.05, rel:0.2,  harmonics:[1,0.5,0.1], vibrato:0 },
+  };
+
+  /* ── Genre → timbre mapping ───────────────────────────── */
+  const GENRE_TIMBRE = {
+    'western':   'honkytonk',
+    'noir':      'piano',
+    'circus':    'marimba',
+    'epic':      'brass',
+    'gothic':    'organ',
+    'pastoral':  'flute',
+    'scifi':     'pad',
+    'ragtime':   'honkytonk',
+    'romantic':  'strings',
+    'romance':   'pad',
+    'latin':     'pizzicato',
+    'musical':   'piano',
+    'cinematic': 'strings',
+    'soap':      'strings',
+    'sexy':      'pad',
+    'religious': 'organ',
+    // song genres
+    'rock':           'brass',
+    'metal':          'organ',
+    'folk':           'pluck',
+    'jazz':           'piano',
+    'pop':            'piano',
+    'singersongwriter':'pluck',
+    'itpop':          'strings',
+    'funksoul':       'piano',
+    'reggae':         'piano',
+    'blues':          'honkytonk',
+    'electronic':     'pad',
+    'hiphop':         'pad',
+    // World & new genres
+    'chinese':        'pizzicato',
+    'itanni80':       'strings',
+    'samba':          'piano',
+    'rap':            'pad',
+    'japanese':       'pluck',
+    'arabic':         'pluck',
+    // feelings
+    'comic':     'marimba',
+    'sad':       'strings',
+    'tense':     'organ',
+    'romance':   'pad',
+    'action':    'brass',
+    'calm':      'flute',
+    'anger':     'brass',
+    'triumph':   'brass',
+  };
+
+  /* ── Chord definitions: root semitone offsets ─────────── */
+  // Each chord name → intervals from root
+  const CHORD_INTERVALS = {
+    'maj':   [0,4,7],
+    'min':   [0,3,7],
+    'dim':   [0,3,6],
+    'dim7':  [0,3,6,9],
+    'aug':   [0,4,8],
+    'maj7':  [0,4,7,11],
+    'min7':  [0,3,7,10],
+    'dom7':  [0,4,7,10],
+    'maj9':  [0,4,7,11,14],
+    'min9':  [0,3,7,10,14],
+    'sus2':  [0,2,7],
+    'sus4':  [0,5,7],
+    'dom7sus':[0,5,7,10],
+    'half_dim':[0,3,6,10],
+    'add9':  [0,4,7,14],
+    'min_maj7':[0,3,7,11],
+  };
+
+  /* ── Parse a chord symbol like "im7", "bVII", "IV9" ──── */
+  function parseChordSymbol(sym, rootKey, mode) {
+    sym = sym.trim();
+    if (!sym || sym === '–' || sym === '-') return null;
+
+    // Determine root semitone
+    let flat = 0;
+    let s = sym;
+    while (s.startsWith('b')) { flat++; s = s.slice(1); }
+
+    const numeralMatch = s.match(/^(VII|VI|IV|V|III|II|I|vii|vi|iv|v|iii|ii|i)/);
+    if (!numeralMatch) return null;
+    const numeral = numeralMatch[1];
+    const rest = s.slice(numeral.length); // e.g. "m7", "7", "maj7", "sus2"
+
+    const majorScale = [0,2,4,5,7,9,11];
+    const minorScale = [0,2,3,5,7,8,10];
+    const scale = mode === 'minor' ? minorScale : majorScale;
+    const degreeMap = {'I':0,'II':1,'III':2,'IV':3,'V':4,'VI':5,'VII':6,'i':0,'ii':1,'iii':2,'iv':3,'v':4,'vi':5,'vii':6};
+    const degree = degreeMap[numeral];
+    if (degree === undefined) return null;
+    let rootSemitone = (rootKey + scale[degree] - flat + 120) % 12;
+
+    // Determine chord quality
+    const isMinorNumeral = numeral === numeral.toLowerCase();
+    let intervals;
+
+    if (rest.includes('maj7')) intervals = CHORD_INTERVALS['maj7'];
+    else if (rest.includes('min9') || rest === 'm9') intervals = CHORD_INTERVALS['min9'];
+    else if (rest.includes('maj9')) intervals = CHORD_INTERVALS['maj9'];
+    else if (rest.includes('add9')) intervals = CHORD_INTERVALS['add9'];
+    else if (rest.includes('sus4')) intervals = CHORD_INTERVALS['sus4'];
+    else if (rest.includes('sus2')) intervals = CHORD_INTERVALS['sus2'];
+    else if (rest.includes('7sus') || rest.includes('sus')) intervals = CHORD_INTERVALS['dom7sus'];
+    else if (rest.includes('ø7') || rest.includes('ø')) intervals = CHORD_INTERVALS['half_dim'];
+    else if (rest.includes('dim7')) intervals = CHORD_INTERVALS['dim7'];
+    else if (rest.includes('dim')) intervals = CHORD_INTERVALS['dim'];
+    else if (rest.includes('aug')) intervals = CHORD_INTERVALS['aug'];
+    else if (rest.includes('m7') || rest === 'im7') intervals = CHORD_INTERVALS['min7'];
+    else if (rest.includes('7')) {
+      if (isMinorNumeral) intervals = CHORD_INTERVALS['min7'];
+      else intervals = CHORD_INTERVALS['dom7'];
+    }
+    else if (rest.includes('9')) {
+      if (isMinorNumeral) intervals = CHORD_INTERVALS['min9'];
+      else intervals = CHORD_INTERVALS['maj9'];
+    }
+    else if (isMinorNumeral) intervals = CHORD_INTERVALS['min'];
+    else intervals = CHORD_INTERVALS['maj'];
+
+    // Build MIDI notes: bass octave 3, chord octave 4
+    const bassMidi = 48 + rootSemitone; // C3 = 48
+    const chordMidi = intervals.map(i => 60 + rootSemitone + i); // C4 = 60
+    return [bassMidi, ...chordMidi];
+  }
+
+  /* ── Parse a full progression string ─────────────────── */
+  function parseProgression(progText, rootKey, mode) {
+    // Remove parenthetical labels like "(Lamento)", "(hymn)", etc.
+    const clean = progText.replace(/\([^)]*\)/g, '').replace(/stinger/gi,'');
+    // Split on – or - (en-dash or hyphen)
+    const parts = clean.split(/\s*[–-]\s*/).map(s => s.trim()).filter(Boolean);
+    return parts.map(p => parseChordSymbol(p, rootKey, mode)).filter(Boolean);
+  }
+
+  /* ── Play a single note with given timbre ────────────── */
+  function playNote(ctx, midi, timbreName, startTime, duration, velocity=0.6) {
+    const timbre = TIMBRES[timbreName] || TIMBRES.piano;
+    const freq   = midiToHz(midi);
+    const t0     = safeTime(startTime);          // ← clamp once here
+    const t_end  = Math.max(t0 + duration, t0 + 0.05);
+
+    const gainNode = ctx.createGain();
+    gainNode.connect(ctx.destination);
+
+    // Envelope — all times derived from clamped t0
+    const atk = timbre.atk;
+    const dec = timbre.dec;
+    const sus = timbre.sus * velocity;
+    const rel = timbre.rel;
+
+    gainNode.gain.setValueAtTime(0,         t0);
+    gainNode.gain.linearRampToValueAtTime(velocity,     t0 + atk);
+    gainNode.gain.linearRampToValueAtTime(sus,          t0 + atk + dec);
+    gainNode.gain.setValueAtTime(sus,       Math.max(t0 + atk + dec, t_end - rel));
+    gainNode.gain.linearRampToValueAtTime(0,            t_end);
+
+    const harmonics = timbre.harmonics || [1];
+    harmonics.forEach((amp, i) => {
+      const osc = ctx.createOscillator();
+      osc.type = timbre.osc || 'sine';
+      const harmFreq = freq * (i + 1);
+      osc.frequency.setValueAtTime(harmFreq, t0);
+
+      // Honky-tonk detuned double
+      if (timbre.detune && i === 0) {
+        const osc2 = ctx.createOscillator();
+        osc2.type = timbre.osc;
+        osc2.frequency.setValueAtTime(harmFreq, t0);
+        osc2.detune.setValueAtTime(timbre.detune, t0);
+        const g2 = ctx.createGain();
+        g2.gain.setValueAtTime(amp * 0.4, t0);
+        osc2.connect(g2);
+        g2.connect(gainNode);
+        osc2.start(t0);
+        osc2.stop(t_end + 0.05);
+        activeNodes.push(osc2);
+      }
+
+      // Vibrato LFO
+      if (timbre.vibrato > 0 && i === 0) {
+        const lfo = ctx.createOscillator();
+        const lfoGain = ctx.createGain();
+        lfo.frequency.setValueAtTime(5.5, t0);
+        lfoGain.gain.setValueAtTime(timbre.vibrato * freq * 0.01, t0);
+        lfo.connect(lfoGain);
+        lfoGain.connect(osc.frequency);
+        lfo.start(t0);
+        lfo.stop(t_end + 0.05);
+        activeNodes.push(lfo);
+      }
+
+      const hGain = ctx.createGain();
+      hGain.gain.setValueAtTime(amp / harmonics.length, t0);
+      osc.connect(hGain);
+      hGain.connect(gainNode);
+      osc.start(t0);
+      osc.stop(t_end + 0.05);
+      activeNodes.push(osc);
+    });
+  }
+
+  /* ── Genre metadata: root key (semitones from C) and mode ── */
+  const GENRE_META = {
+    // Theatrical genres
+    'western':          { root:9,  mode:'major' }, // A major
+    'noir':             { root:5,  mode:'minor' }, // F minor
+    'circus':           { root:0,  mode:'major' }, // C major
+    'epic':             { root:9,  mode:'minor' }, // A minor
+    'gothic':           { root:2,  mode:'minor' }, // D minor
+    'pastoral':         { root:7,  mode:'major' }, // G major
+    'scifi':            { root:0,  mode:'minor' }, // C minor
+    'ragtime':          { root:5,  mode:'major' }, // F major
+    'romantic':         { root:3,  mode:'major' }, // Eb major
+    'latin':            { root:9,  mode:'minor' }, // A minor
+    'musical':          { root:0,  mode:'major' }, // C major
+    'cinematic':        { root:9,  mode:'minor' }, // A minor
+    'soap':             { root:5,  mode:'minor' }, // F minor
+    'sexy':             { root:9,  mode:'minor' }, // A minor
+    'religious':        { root:0,  mode:'major' }, // C major
+    // Song genres
+    'rock':             { root:4,  mode:'minor' }, // E minor
+    'metal':            { root:4,  mode:'minor' }, // E minor
+    'folk':             { root:7,  mode:'major' }, // G major
+    'jazz':             { root:10, mode:'major' }, // Bb major
+    'pop':              { root:0,  mode:'major' }, // C major
+    'singersongwriter': { root:0,  mode:'major' }, // C major
+    'itpop':            { root:0,  mode:'major' }, // C major
+    'funksoul':         { root:4,  mode:'minor' }, // E minor
+    'reggae':           { root:9,  mode:'major' }, // A major
+    'blues':            { root:4,  mode:'minor' }, // E minor
+    'electronic':       { root:9,  mode:'minor' }, // A minor
+    'hiphop':           { root:5,  mode:'minor' }, // F minor
+    // World & new genres
+    'chinese':          { root:7,  mode:'major' }, // G major pentatonic
+    'itanni80':         { root:4,  mode:'minor' }, // E minor
+    'samba':            { root:7,  mode:'major' }, // G major
+    'rap':              { root:5,  mode:'minor' }, // F minor
+    'japanese':         { root:9,  mode:'major' }, // A major
+    'arabic':           { root:2,  mode:'minor' }, // D Hijaz
+    // Feelings
+    'comic':            { root:0,  mode:'major' },
+    'sad':              { root:2,  mode:'minor' },
+    'tense':            { root:5,  mode:'minor' },
+    'romance':          { root:3,  mode:'major' },
+    'action':           { root:4,  mode:'minor' },
+    'calm':             { root:7,  mode:'major' },
+    'anger':            { root:5,  mode:'minor' },
+    'triumph':          { root:3,  mode:'major' },
+  };
+
+
+  /* ── Playback state ─────────────────────────────────── */
+  let activeNodes = [];   // all currently scheduled OscillatorNodes
+  let activeTimer = null; // auto-reset timeout
+  let activeBtn   = null; // the currently "playing" button
+
+
+  /* ═══════════════════════════════════════════════════════
+     RHYTHM PATTERN ENGINE
+     sig:[beats, denominator]
+     bass/chord arrays at 8th-note resolution unless subdiv:16 specified
+     slots: 'b'=bass hit  'c'=chord hit  '.'=rest
+     swing:true applies triplet swing to 8th notes
+  ═══════════════════════════════════════════════════════ */
+  const RHYTHM_PATTERNS = {
+
+    /* ── Theatrical genres ── */
+
+    western: [
+      { name: 'Boom-Chuck (3/4)',
+        bpm: 100, sig: [3,4], feel: 'Waltz — bass on 1, chords on 2 & 3',
+        bass:  ['b','.', '.', '.', '.', '.'],
+        chord: ['.','.',  'c', '.', 'c', '.'] },
+      { name: 'Boom-Chicka (4/4)',
+        bpm: 108, sig: [4,4], feel: 'Country — bass alternates, chords on 2 & 4',
+        bass:  ['b','.','b','.','b','.','b','.'],
+        chord: ['.','.','.','c','.','.','.','c'] },
+    ],
+
+    noir: [
+      { name: 'Slow Staccato (4/4)',
+        bpm: 60, sig: [4,4], feel: 'Sparse — one chord per bar, silence between',
+        bass:  ['b','.','.','.','.','.','.', '.'],
+        chord: ['c','.','.','.','.','.','.', '.'] },
+      { name: 'Walking Comp (4/4)',
+        bpm: 72, sig: [4,4], feel: 'Walking — bass moves, chord stabs on 2 & 4',
+        bass:  ['b','.','b','.','b','.','b','.'],
+        chord: ['.','.','.','c','.','.','.','c'],
+        swing: true },
+    ],
+
+    circus: [
+      { name: 'Oom-Pah (2/4)',
+        bpm: 148, sig: [2,4], feel: 'March — bass on 1, chord on 2',
+        bass:  ['b','.','.','.'],
+        chord: ['.','.',  'c', '.'] },
+      { name: 'Polka (4/4)',
+        bpm: 160, sig: [4,4], feel: 'Polka — bass/chord alternating every beat',
+        bass:  ['b','.','.','.','b','.','.','.'],
+        chord: ['.','.',  'c', '.', '.', '.', 'c', '.'] },
+    ],
+
+    epic: [
+      { name: 'Half-time (4/4)',
+        bpm: 58, sig: [4,4], feel: 'Slow block chords — one chord every two beats',
+        bass:  ['b','.','.','.','.','.','.','.' ],
+        chord: ['c','.','.','.',  'c', '.', '.', '.'] },
+      { name: 'March (4/4)',
+        bpm: 76, sig: [4,4], feel: 'Stately march — chords on every beat',
+        bass:  ['b','.','b','.','b','.','b','.'],
+        chord: ['c','.','c','.','c','.','c','.'] },
+    ],
+
+    gothic: [
+      { name: 'Slow Arpeggio (4/4)',
+        bpm: 52, sig: [4,4], feel: 'Creeping — sparse arpeggio, long sustains',
+        bass:  ['b','.','.','.','.','.','.', '.'],
+        chord: ['.','c','.','.','.','c','.','.'] },
+      { name: 'Funeral March (4/4)',
+        bpm: 44, sig: [4,4], feel: 'Funeral — dotted march feel, very slow',
+        bass:  ['b','.','b','.','.','.','.', '.'],
+        chord: ['c','.','.','.', 'c', '.', '.', '.'] },
+    ],
+
+    pastoral: [
+      { name: '6/8 Lilt',
+        bpm: 69, sig: [6,8], feel: 'Lilting — compound time, gentle arpeggio',
+        bass:  ['b','.','.','.','.','.'],
+        chord: ['.','c','.','.',  'c', '.'] },
+      { name: 'Flowing 3/4',
+        bpm: 80, sig: [3,4], feel: 'Waltz feel — arpeggiated, never hurried',
+        bass:  ['b', '.', '.', '.', '.', '.'],
+        chord: ['.', 'c', '.', '.', 'c', '.'] },
+    ],
+
+    scifi: [
+      { name: 'Slow Pulse (4/4)',
+        bpm: 44, sig: [4,4], feel: 'Minimal — one long chord, sparse hits',
+        bass:  ['b','.','.','.','.','.','.', '.'],
+        chord: ['c','.','.','.','.','.','.', '.'] },
+      { name: 'Motorik (4/4)',
+        bpm: 116, sig: [4,4], feel: 'Motorik — steady 8ths, hypnotic',
+        bass:  ['b','.','b','.','b','.','b','.'],
+        chord: ['c','.','c','.','c','.','c','.'] },
+    ],
+
+    ragtime: [
+      { name: 'Ragtime 2-beat',
+        bpm: 120, sig: [4,4], feel: 'Classic rag — bass on 1&3, chord on 2&4',
+        bass:  ['b','.','.','.','b','.','.','.'],
+        chord: ['.','.',  'c', '.', '.', '.', 'c', '.'] },
+      { name: 'Stride',
+        bpm: 132, sig: [4,4], feel: 'Stride — octave bass, mid-chord, alternating',
+        bass:  ['b','.','.','b','.','.','b','.'],
+        chord: ['.','c','.','.','c','.','.','c'] },
+    ],
+
+    romantic: [
+      { name: 'Slow Arpeggio (3/4)',
+        bpm: 60, sig: [3,4], feel: 'Rubato waltz — sweep up through the chord',
+        bass:  ['b', '.', '.', '.', '.', '.'],
+        chord: ['.', 'c', 'c', '.', 'c', 'c'] },
+      { name: 'Ballad (4/4)',
+        bpm: 56, sig: [4,4], feel: 'Ballad — bass then rolling 8th arpeggio',
+        bass:  ['b','.','.','.','.','.','.', '.'],
+        chord: ['.','c','c','.','.',  'c', 'c', '.'] },
+    ],
+
+    latin: [
+      { name: 'Tango (4/4)',
+        bpm: 108, sig: [4,4], feel: 'Tango — sharp staccato hits, Andalusian feel',
+        bass:  ['b','.','.','.','.','.','b','.'],
+        chord: ['c','.','.','c','.','.','.','.'] },
+      { name: 'Bossa Nova (4/4)',
+        bpm: 130, sig: [4,4], feel: 'Bossa — syncopated cross-rhythm',
+        subdiv: 16,
+        bass:  ['b','.','.','.','b','.','.','.','b','.','.','.','b','.','.', '.'],
+        chord: ['.','.','.','c','.','c','.','.','.','.','.','c','.','c','.','c'] },
+    ],
+
+    musical: [
+      { name: 'Broadway Vamp (4/4)',
+        bpm: 92, sig: [4,4], feel: 'Vamp — strong downbeat, chords on 2&4',
+        bass:  ['b','.','.','.','b','.','.','.'],
+        chord: ['.','.',  'c', '.', '.', '.', 'c', '.'] },
+      { name: 'Show Ballad (4/4)',
+        bpm: 72, sig: [4,4], feel: 'Ballad — block chords, steady and even',
+        bass:  ['b','.','.','.','.','.','.', '.'],
+        chord: ['c','.','.','.',  'c', '.', '.', '.'] },
+    ],
+
+    cinematic: [
+      { name: 'Long Swell (4/4)',
+        bpm: 50, sig: [4,4], feel: 'Cinematic — one chord per two bars, breathe',
+        bass:  ['b','.','.','.','.','.','.', '.'],
+        chord: ['c','.','.','.','.','.','.', '.'] },
+      { name: 'Ostinato (4/4)',
+        bpm: 72, sig: [4,4], feel: 'Ostinato — repeated bass figure, pads above',
+        bass:  ['b','.','b','.','b','.','b','.'],
+        chord: ['.','.','c','.','.','.',  'c', '.'] },
+    ],
+
+    soap: [
+      { name: 'Melodrama (4/4)',
+        bpm: 56, sig: [4,4], feel: 'Slow & over-emotive — chords land hard',
+        bass:  ['b','.','.','.','.','.','.', '.'],
+        chord: ['c','.','.','.',  'c', '.', '.', '.'] },
+      { name: 'Stinger',
+        bpm: 80, sig: [4,4], feel: 'Dun-dun-DUN — three ascending hits',
+        bass:  ['b','.','.','.','.','b','.','.'],
+        chord: ['.','.','.','.','.','.','c','.'] },
+    ],
+
+    sexy: [
+      { name: 'Slow Groove (4/4)',
+        bpm: 56, sig: [4,4], feel: 'Behind the beat — lazy, unresolved',
+        bass:  ['b','.','.','.','.','.','.', '.'],
+        chord: ['.','.','c','.','.','.',  'c', '.'] },
+      { name: 'Minor Ballad (4/4)',
+        bpm: 62, sig: [4,4], feel: 'Lush minor — chord breathes over bass pulse',
+        bass:  ['b','.','b','.','b','.','b','.'],
+        chord: ['.','c','.','.','.','c','.','.'] },
+    ],
+
+    religious: [
+      { name: 'Hymn (4/4)',
+        bpm: 58, sig: [4,4], feel: 'Steady hymn — equal quarter notes, no swing',
+        bass:  ['b','.','.','.','.','.','.', '.'],
+        chord: ['c','.','c','.','c','.','c','.'] },
+      { name: 'Gospel (4/4)',
+        bpm: 80, sig: [4,4], feel: 'Gospel swing — blue notes, call & response',
+        bass:  ['b','.','b','.','b','.','b','.'],
+        chord: ['.','c','.','c','.','c','.','c'],
+        swing: true },
+    ],
+
+    /* ── Song genres ── */
+
+    rock: [
+      { name: 'Classic Rock (4/4)',
+        bpm: 120, sig: [4,4], feel: 'Backbeat — strong hit on 2 & 4',
+        bass:  ['b','.','b','.','b','.','b','.'],
+        chord: ['.','.','.',  'c', '.', '.', '.', 'c'] },
+      { name: 'Power Ballad (4/4)',
+        bpm: 72, sig: [4,4], feel: 'Power ballad — block chords, building',
+        bass:  ['b','.','.','.','.','.','.', '.'],
+        chord: ['c','.','.','.','c','.','.', '.'] },
+    ],
+
+    metal: [
+      { name: 'Heavy (4/4)',
+        bpm: 140, sig: [4,4], feel: 'Heavy — on the beat, brutal and precise',
+        bass:  ['b','.','b','.','b','.','b','.'],
+        chord: ['c','.','c','.','c','.','c','.'] },
+      { name: 'Half-time (4/4)',
+        bpm: 100, sig: [4,4], feel: 'Half-time feel — big hit on 3, space around it',
+        bass:  ['b','.','.','.','.','.','.', '.'],
+        chord: ['.','.','.','.',  'c', '.', '.', '.'] },
+    ],
+
+    folk: [
+      { name: 'Fingerpick (4/4)',
+        bpm: 88, sig: [4,4], feel: 'Travis pick — bass alternates, inner melody',
+        bass:  ['b','.','b','.','b','.','b','.'],
+        chord: ['.','c','.','c','.','c','.','c'] },
+      { name: 'Folk Waltz (3/4)',
+        bpm: 132, sig: [3,4], feel: 'Celtic waltz — lilt on beat 1',
+        bass:  ['b', '.', '.', '.', '.', '.'],
+        chord: ['.', 'c', '.', '.', 'c', '.'] },
+    ],
+
+    jazz: [
+      { name: 'Swing Comp (4/4)',
+        bpm: 120, sig: [4,4], feel: 'Swing 8ths — sparse syncopated comping',
+        bass:  ['b','.','.','.',  'b', '.', '.', '.'],
+        chord: ['.','.',  'c', '.', '.', 'c', '.', 'c'],
+        swing: true },
+      { name: 'Bossa Nova (4/4)',
+        bpm: 130, sig: [4,4], feel: 'Bossa — syncopated cross-rhythm',
+        subdiv: 16,
+        bass:  ['b','.','.','.','b','.','.','.','b','.','.','.','b','.','.', '.'],
+        chord: ['.','.','.','c','.','c','.','.','.','.','.','c','.','c','.','c'] },
+    ],
+
+    pop: [
+      { name: 'Pop 8ths (4/4)',
+        bpm: 100, sig: [4,4], feel: 'Straight 8ths — chords on every 8th note',
+        bass:  ['b','.','b','.','b','.','b','.'],
+        chord: ['c','c','c','c','c','c','c','c'] },
+      { name: 'Pop Ballad (4/4)',
+        bpm: 76, sig: [4,4], feel: 'Ballad — arpeggiated, beat 1 + off-beats',
+        bass:  ['b','.','.','.','.','.','.', '.'],
+        chord: ['.','c','.','c','.','c','.','c'] },
+    ],
+
+    singersongwriter: [
+      { name: 'Open Arpeggio (4/4)',
+        bpm: 68, sig: [4,4], feel: 'Open — sparse add9 chords, breathe',
+        bass:  ['b','.','.','.','.','.','.', '.'],
+        chord: ['.','c','.','.','.','c','.','.'] },
+      { name: 'Gentle 3/4',
+        bpm: 80, sig: [3,4], feel: 'Intimate — bass once, chord follows softly',
+        bass:  ['b', '.', '.', '.', '.', '.'],
+        chord: ['.', 'c', 'c', '.', '.', '.'] },
+    ],
+
+    itpop: [
+      { name: 'Cantautorato (4/4)',
+        bpm: 76, sig: [4,4], feel: 'Bittersweet — legato chords, stepwise bass',
+        bass:  ['b','.','b','.','b','.','b','.'],
+        chord: ['.','c','.','.', '.','c','.','.'] },
+      { name: 'Ballata (3/4)',
+        bpm: 88, sig: [3,4], feel: 'Italian ballad — waltz, melancholy lilt',
+        bass:  ['b', '.', '.', '.', '.', '.'],
+        chord: ['.', 'c', '.', 'c', '.', '.'] },
+    ],
+
+    funksoul: [
+      { name: 'Funk 16ths (4/4)',
+        bpm: 104, sig: [4,4], feel: 'Tight 16ths — stabs on the off-beats',
+        subdiv: 16,
+        bass:  ['b','.','.','.','.','.','b','.','b','.','.','.','.','.','b','.'],
+        chord: ['.','.','.','c','.','c','.','.','.','.','.',  'c','.','c','.','c'] },
+      { name: 'Soul Groove (4/4)',
+        bpm: 92, sig: [4,4], feel: 'Soul — bass on 1&3, chord on 2&4, shuffled',
+        bass:  ['b','.','.','.','b','.','.','.'],
+        chord: ['.','.',  'c', '.', '.', '.', 'c', '.'],
+        swing: true },
+    ],
+
+    reggae: [
+      { name: 'One-Drop (4/4)',
+        bpm: 80, sig: [4,4], feel: 'One-drop — skank on 2 & 4, nothing on 1',
+        bass:  ['b','.','.','.',  'b', '.', '.', '.'],
+        chord: ['.','.','.',  'c', '.', '.', '.', 'c'] },
+      { name: 'Ska Skank (4/4)',
+        bpm: 148, sig: [4,4], feel: 'Ska — stab on every off-beat 8th',
+        bass:  ['b','.','b','.','b','.','b','.'],
+        chord: ['.','c','.','c','.','c','.','c'] },
+    ],
+
+    blues: [
+      { name: 'Shuffle (4/4)',
+        bpm: 88, sig: [4,4], feel: 'Blues shuffle — swing 8ths, 12-bar feel',
+        bass:  ['b','.','b','.','b','.','b','.'],
+        chord: ['c','.','.','.',  'c', '.', '.', '.'],
+        swing: true },
+      { name: 'Slow Blues (4/4)',
+        bpm: 60, sig: [4,4], feel: 'Slow blues — bent notes, long phrases',
+        bass:  ['b','.','.','.','.','.','.', '.'],
+        chord: ['c','.','.','.','.','.','.', '.'],
+        swing: true },
+    ],
+
+    electronic: [
+      { name: 'Four-on-Floor (4/4)',
+        bpm: 120, sig: [4,4], feel: 'Club — kick on every beat, synth stabs',
+        bass:  ['b','.','b','.','b','.','b','.'],
+        chord: ['.','.',  'c', '.', '.', '.', 'c', '.'] },
+      { name: 'Synth Arp (4/4)',
+        bpm: 128, sig: [4,4], feel: 'Arp — 16th-note pattern over held chord',
+        subdiv: 16,
+        bass:  ['b','.','.','.','.','.','.','.',  'b','.','.','.','.','.','.', '.'],
+        chord: ['c','.','.','c','.','.','c','.',  'c','.','.','c','.','.','c','.'] },
+    ],
+
+    hiphop: [
+      { name: 'Boom-Bap (4/4)',
+        bpm: 90, sig: [4,4], feel: 'Boom-bap — kick on 1, snare on 3, lazy feel',
+        bass:  ['b','.','.','.',  'b', '.', '.', '.'],
+        chord: ['.','.','.',  'c', '.', '.', 'c', '.'],
+        swing: true },
+      { name: 'Trap (4/4)',
+        bpm: 140, sig: [4,4], feel: 'Trap — sparse bass, hi-hat rolls implied',
+        subdiv: 16,
+        bass:  ['b','.','.','.','.','.','.','.','.','.','.','.','.','.','.', '.'],
+        chord: ['.','.','.','.',  'c','.','.','.', '.','.','.','.',  'c','.','.','.'] },
+    ],
+
+    /* ── Feelings ── */
+
+    comic: [
+      { name: 'Staccato March (2/4)',
+        bpm: 132, sig: [2,4], feel: 'Bouncy — crisp staccato, slight rush',
+        bass:  ['b','.','.','.'],
+        chord: ['.', 'c', '.', 'c'] },
+      { name: 'Galop (4/4)',
+        bpm: 168, sig: [4,4], feel: 'Galop — fast running 8ths, manic energy',
+        bass:  ['b','.','b','.','b','.','b','.'],
+        chord: ['c','.','.','.',  'c', '.', '.', '.'] },
+    ],
+
+    sad: [
+      { name: 'Slow Arpeggio (4/4)',
+        bpm: 54, sig: [4,4], feel: 'Grief — sparse rising arpeggio, long pauses',
+        bass:  ['b','.','.','.','.','.','.', '.'],
+        chord: ['.','c','.','.','.',  'c', '.', '.'] },
+      { name: 'Minor Ballad (3/4)',
+        bpm: 60, sig: [3,4], feel: 'Lament — slow waltz, melody over bass',
+        bass:  ['b', '.', '.', '.', '.', '.'],
+        chord: ['.', 'c', '.', 'c', '.', '.'] },
+    ],
+
+    tense: [
+      { name: 'Ostinato (4/4)',
+        bpm: 80, sig: [4,4], feel: 'Repeat obsessively — never resolve',
+        bass:  ['b','b','b','b','b','b','b','b'],
+        chord: ['.','.','.','.',  'c', '.', '.', '.'] },
+      { name: 'Slow Build (4/4)',
+        bpm: 58, sig: [4,4], feel: 'Creeping — silence punctuated by stabs',
+        bass:  ['b','.','.','.','.','.','.', '.'],
+        chord: ['.','.','.','.',  'c', '.', '.', '.'] },
+    ],
+
+    romance: [
+      { name: 'Lush Arpeggio (4/4)',
+        bpm: 58, sig: [4,4], feel: 'Wonder — slow arpeggios, wide voicing',
+        bass:  ['b','.','.','.','.','.','.', '.'],
+        chord: ['.','c','c','.','.',  'c', 'c', '.'] },
+      { name: 'Dreamy (3/4)',
+        bpm: 66, sig: [3,4], feel: 'Floating — waltz, very free tempo',
+        bass:  ['b', '.', '.', '.', '.', '.'],
+        chord: ['.', 'c', '.', '.', 'c', '.'] },
+    ],
+
+    action: [
+      { name: 'Driving 8ths (4/4)',
+        bpm: 150, sig: [4,4], feel: 'Relentless — no gaps, pure forward motion',
+        bass:  ['b','b','b','b','b','b','b','b'],
+        chord: ['c','.','c','.','c','.','c','.'] },
+      { name: 'March (4/4)',
+        bpm: 132, sig: [4,4], feel: 'Military — strong downbeat, snappy',
+        bass:  ['b','.','.','.','b','.','.','.'],
+        chord: ['c','.','.','.',  'c', '.', '.', '.'] },
+    ],
+
+    calm: [
+      { name: 'Gentle Pulse (4/4)',
+        bpm: 52, sig: [4,4], feel: 'Meditative — one chord, barely moving',
+        bass:  ['b','.','.','.','.','.','.', '.'],
+        chord: ['c','.','.','.','.','.','.', '.'] },
+      { name: 'Lydian Float (4/4)',
+        bpm: 60, sig: [4,4], feel: 'Floating — sus chords, open voicing',
+        bass:  ['b','.','.','.','.','.','.', '.'],
+        chord: ['.','.',  'c', '.', '.', '.', 'c', '.'] },
+    ],
+
+    anger: [
+      { name: 'Phrygian Stabs (4/4)',
+        bpm: 128, sig: [4,4], feel: 'Aggressive — hammered i–bII, unrelenting',
+        bass:  ['b','.','.','.',  'b', '.', '.', '.'],
+        chord: ['c','.','.','.',  'c', '.', '.', '.'] },
+      { name: 'Cluster Hits (4/4)',
+        bpm: 100, sig: [4,4], feel: 'Explosive — sudden hits, sudden silence',
+        bass:  ['b','.','.','.','.','.','.', '.'],
+        chord: ['c','.','.','.','.','.',  'c', '.'] },
+    ],
+
+    triumph: [
+      { name: 'Fanfare (4/4)',
+        bpm: 100, sig: [4,4], feel: 'Victory — strong downbeats, IV–I landing',
+        bass:  ['b','.','b','.','b','.','b','.'],
+        chord: ['c','.','.','.',  'c', '.', '.', '.'] },
+      { name: 'March (2/4)',
+        bpm: 120, sig: [2,4], feel: 'Triumph march — decisive, no hesitation',
+        bass:  ['b','.','.','.'],
+        chord: ['c','.','c','.'] },
+    ],
+
+    chinese: [
+      { name: 'Pentatonic Flow (4/4)',
+        bpm: 80, sig: [4,4], feel: 'Lyrical — sparse melody over held bass',
+        bass:  ['b','.','.','.','.','.','.', '.'],
+        chord: ['.','c','.','.','.',  'c', '.', '.'] },
+      { name: 'Ceremonial (2/4)',
+        bpm: 96, sig: [2,4], feel: 'Ceremonial — steady pulse, ornamental melody',
+        bass:  ['b','.','.','.'],
+        chord: ['.','c','.','c'] },
+    ],
+
+    itanni80: [
+      { name: 'Driving Minor (4/4)',
+        bpm: 120, sig: [4,4], feel: 'Arena — verse in minor, pulsing 8ths',
+        bass:  ['b','.','b','.','b','.','b','.'],
+        chord: ['.','.','c','.','.','.',  'c', '.'] },
+      { name: 'Big Chorus (4/4)',
+        bpm: 120, sig: [4,4], feel: 'Chorus — major key, block chords, full commitment',
+        bass:  ['b','.','.','.','b','.','.','.'],
+        chord: ['c','.','.','.',  'c', '.', '.', '.'] },
+    ],
+
+    samba: [
+      { name: 'Samba 2/4',
+        bpm: 104, sig: [2,4], feel: 'Classic — bass on 1, anticipate beat 2',
+        bass:  ['b','.','.','.'],
+        chord: ['.','.',  'c', '.'] },
+      { name: 'Samba-Rock (4/4)',
+        bpm: 96, sig: [4,4], feel: 'Samba-rock — syncopated, slightly behind',
+        bass:  ['b','.','b','.','b','.','b','.'],
+        chord: ['.','c','.','.','.',  'c', '.', 'c'],
+        swing: true },
+    ],
+
+    rap: [
+      { name: 'Boom-Bap (4/4)',
+        bpm: 90, sig: [4,4], feel: 'East Coast — kick 1&3, snare 2&4, lazy 8ths',
+        bass:  ['b','.','.','.',  'b', '.', '.', '.'],
+        chord: ['.','.','.',  'c', '.', '.', 'c', '.'],
+        swing: true },
+      { name: 'West Coast (4/4)',
+        bpm: 96, sig: [4,4], feel: 'G-funk — smooth groove, chord on the off-beat',
+        bass:  ['b','.','b','.','b','.','b','.'],
+        chord: ['.','c','.','.','.','c','.','.'] },
+    ],
+
+    japanese: [
+      { name: 'J-pop Ballad (4/4)',
+        bpm: 72, sig: [4,4], feel: 'Emotional — lush arpeggios, sudden silences',
+        bass:  ['b','.','.','.','.','.','.', '.'],
+        chord: ['.','c','c','.','.',  'c', 'c', '.'] },
+      { name: 'Koto Feel (2/4)',
+        bpm: 88, sig: [2,4], feel: 'Traditional — plucked pentatonic, spare bass',
+        bass:  ['b','.','.','.'],
+        chord: ['.','c','.','c'] },
+    ],
+
+    arabic: [
+      { name: 'Maqsum (4/4)',
+        bpm: 96, sig: [4,4], feel: 'Maqsum — long-short-short pulse, modal melody',
+        bass:  ['b','.','.','.','.','.','b','.'],
+        chord: ['c','.','.','.','.','.','.', '.'] },
+      { name: 'Masmoudi (4/4)',
+        bpm: 72, sig: [4,4], feel: 'Masmoudi — slow and stately, ornamental',
+        bass:  ['b','.','.','.','.','.','.', '.'],
+        chord: ['c','.','.','c','.','.','.','.'] },
+    ],
+
+  };
+
+  // Track which rhythm index is selected per genre
+  const selectedRhythm = {};
+
+  /* ── Rhythm-aware chord scheduler ───────────────────── */
+  function scheduleWithRhythm(ctx, chords, timbre, startTime, genreKey) {
+    const rhythms = RHYTHM_PATTERNS[genreKey];
+    const ridx    = selectedRhythm[genreKey] ?? 0;
+    const r       = rhythms ? rhythms[ridx] : null;
+
+    // Fallback for any genre without a rhythm pattern: simple block chords at 80bpm
+    if (!r) {
+      const slotDur = (60 / 80) * 2;
+      chords.forEach((chord, i) => {
+        const t = startTime + i * slotDur;
+        chord.forEach(n => playNote(ctx, n, timbre, t, slotDur * 0.9, 0.6));
+      });
+      return chords.length * slotDur;
+    }
+
+    const beatDur    = 60 / r.bpm;
+    const subdiv     = r.subdiv || 8;
+    const slotDur    = beatDur * (4 / subdiv);
+    const slotsPerBar = r.bass.length;
+    const barDur     = slotsPerBar * slotDur;
+
+    chords.forEach((chord, ci) => {
+      const barStart = startTime + ci * barDur;
+      const bass     = chord[0];
+      const upper    = chord.slice(1);
+
+      r.bass.forEach((hit, slot) => {
+        if (hit === '.') return;
+        const swingT  = r.swing ? swingOffset(slot, slotDur) : 0;
+        const noteDur = r.swing ? slotDur * (slot % 2 === 0 ? 0.65 : 0.35) : slotDur * 0.9;
+        playNote(ctx, bass, timbre, barStart + slot * slotDur + swingT, Math.max(noteDur, 0.06), 0.7);
+      });
+
+      r.chord.forEach((hit, slot) => {
+        if (hit === '.') return;
+        const swingT  = r.swing ? swingOffset(slot, slotDur) : 0;
+        const noteDur = r.swing ? slotDur * (slot % 2 === 0 ? 0.65 : 0.35) : slotDur * 0.85;
+        upper.forEach(n => playNote(ctx, n, timbre, barStart + slot * slotDur + swingT, Math.max(noteDur, 0.05), 0.5));
+      });
+    });
+
+    return chords.length * barDur;
+  }
+
+  function swingOffset(slot, slotDur) {
+    return (slot % 2 === 1) ? slotDur * 0.33 : 0;
+  }
+
+  /* ── Updated playProgression ─────────────────────────── */
+  function playProgression(btn, genreKey) {
+    stopAll();
+    const ctx    = getCtx();
+    const meta   = GENRE_META[genreKey] || { root:0, mode:'major' };
+    const timbre = GENRE_TIMBRE[genreKey] || 'piano';
+    const chords = parseProgression(btn.getAttribute('data-prog'), meta.root, meta.mode);
+    if (!chords.length) return;
+
+    const t0   = ctx.currentTime + 0.1;
+    const dur1 = scheduleWithRhythm(ctx, chords, timbre, t0, genreKey);
+    const dur2 = scheduleWithRhythm(ctx, chords, timbre, t0 + dur1 + 0.08, genreKey);
+
+    btn.textContent = '■ Stop';
+    btn.classList.add('playing');
+    activeBtn  = btn;
+    activeTimer = setTimeout(() => stopAll(), (dur1 + dur2 + 0.6) * 1000);
+  }
+
+  /* ═══════════════════════════════════════════════════════
+     SVG NOTATION RENDERER
+  ═══════════════════════════════════════════════════════ */
+  function buildRhythmSVG(r) {
+    const W = 340, H = 88;
+    const staffTop = 28, staffGap = 8;
+    const numLines = 2; // simplified 2-line staff (bass + treble indicator)
+    const leftMargin = 48, rightMargin = 12;
+    const usableW = W - leftMargin - rightMargin;
+
+    const slots  = r.bass.length;
+    const slotW  = usableW / slots;
+    const subdiv = r.subdiv || 8;
+    const beatsPerBar = r.sig[0];
+    const slotsPerBeat = slots / beatsPerBar;
+
+    let svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" style="width:100%;max-width:${W}px;font-family:'DM Mono',monospace">`;
+
+    // ── Tempo + feel label ──
+    svg += `<text x="4" y="11" font-size="9" fill="#8a7a6a" font-family="DM Mono,monospace">♩=${r.bpm}${r.swing?' (swing)':''}</text>`;
+    svg += `<text x="${W/2}" y="11" font-size="8" fill="#8a7a6a" text-anchor="middle" font-style="italic">${r.feel}</text>`;
+
+    // ── Time signature ──
+    svg += `<text x="6" y="${staffTop + 6}" font-size="16" font-weight="bold" fill="#1a1208" font-family="serif">${r.sig[0]}</text>`;
+    svg += `<text x="6" y="${staffTop + 20}" font-size="16" font-weight="bold" fill="#1a1208" font-family="serif">${r.sig[1]}</text>`;
+
+    // ── Two staff rows: upper (chords/RH) and lower (bass/LH) ──
+    const rowY = [staffTop + 2, staffTop + 32];
+    const rowLabel = ['RH', 'LH'];
+    rowLabel.forEach((lbl, ri) => {
+      svg += `<text x="${leftMargin - 6}" y="${rowY[ri] + 5}" font-size="7" fill="#8a7a6a" text-anchor="end">${lbl}</text>`;
+      // Staff line
+      svg += `<line x1="${leftMargin}" y1="${rowY[ri] + 4}" x2="${W - rightMargin}" y2="${rowY[ri] + 4}" stroke="#c8b898" stroke-width="0.8"/>`;
+      svg += `<line x1="${leftMargin}" y1="${rowY[ri] + 10}" x2="${W - rightMargin}" y2="${rowY[ri] + 10}" stroke="#c8b898" stroke-width="0.8"/>`;
+    });
+
+    // ── Bar lines at beat boundaries ──
+    for (let beat = 0; beat <= beatsPerBar; beat++) {
+      const x = leftMargin + beat * slotsPerBeat * slotW;
+      svg += `<line x1="${x}" y1="${rowY[0]}" x2="${x}" y2="${rowY[1] + 14}" stroke="#1a1208" stroke-width="${beat === 0 || beat === beatsPerBar ? 1.5 : 0.5}"/>`;
+    }
+
+    // ── Beat numbers ──
+    for (let b = 0; b < beatsPerBar; b++) {
+      const x = leftMargin + (b + 0.5) * slotsPerBeat * slotW;
+      svg += `<text x="${x}" y="${H - 4}" font-size="7.5" fill="#b0a090" text-anchor="middle">${b + 1}</text>`;
+    }
+
+    // ── Notes / rests ──
+    const pattern = [r.chord, r.bass];
+    const COLORS  = { c: '#2a4a7a', b: '#2a7a6e', x: '#1a1208' };
+
+    pattern.forEach((pat, ri) => {
+      pat.forEach((hit, slot) => {
+        const cx = leftMargin + (slot + 0.5) * slotW;
+        const cy = rowY[ri] + 7;
+
+        if (hit === '.' || hit === 'r') {
+          // rest: small dash
+          svg += `<line x1="${cx-3}" y1="${cy}" x2="${cx+3}" y2="${cy}" stroke="#c8b898" stroke-width="1.5" stroke-dasharray="2,1"/>`;
+        } else {
+          const col = COLORS[hit] || '#1a1208';
+          const isFilled = (subdiv >= 8); // quarter notes open, 8th+ filled
+          // Notehead
+          svg += `<ellipse cx="${cx}" cy="${cy}" rx="4" ry="3" fill="${isFilled ? col : 'none'}" stroke="${col}" stroke-width="1.2" transform="rotate(-15,${cx},${cy})"/>`;
+          // Stem
+          svg += `<line x1="${cx+3.5}" y1="${cy-1}" x2="${cx+3.5}" y2="${cy-11}" stroke="${col}" stroke-width="1.2"/>`;
+          // Flag/beam indicator for 8th notes
+          if (subdiv >= 8) {
+            svg += `<path d="M${cx+3.5} ${cy-11} Q${cx+10} ${cy-7} ${cx+7} ${cy-4}" fill="none" stroke="${col}" stroke-width="1.2"/>`;
+          }
+          // Swing dot on even slots if swing mode
+          if (r.swing && slot % 2 === 0) {
+            svg += `<circle cx="${cx+6}" cy="${cy-13}" r="1.2" fill="${col}"/>`;
+          }
+        }
+      });
+    });
+
+    svg += `</svg>`;
+    return svg;
+  }
+
+  /* ═══════════════════════════════════════════════════════
+     RHYTHM TOGGLE INJECTION
+  ═══════════════════════════════════════════════════════ */
+  function injectRhythmToggle(card, genreKey) {
+    const rhythms = RHYTHM_PATTERNS[genreKey];
+    if (!rhythms || !rhythms.length) return;
+
+    // Initialise selection
+    selectedRhythm[genreKey] = 0;
+
+    // ── Toggle button ──
+    const toggle = document.createElement('div');
+    toggle.className = 'rhythm-toggle-btn';
+    toggle.innerHTML = `<span class="rhythm-toggle-icon">♩</span> Rhythm &amp; Tempo <span class="rhythm-toggle-caret">▸</span>`;
+
+    // ── Panel ──
+    const panel = document.createElement('div');
+    panel.className = 'rhythm-panel';
+    panel.style.display = 'none';
+
+    // ── Rhythm figures ──
+    const figRow = document.createElement('div');
+    figRow.className = 'rhythm-fig-row';
+
+    rhythms.forEach((r, idx) => {
+      const fig = document.createElement('div');
+      fig.className = 'rhythm-fig' + (idx === 0 ? ' rhythm-fig-active' : '');
+      fig.innerHTML = `
+        <div class="rhythm-fig-name">${r.name}</div>
+        ${buildRhythmSVG(r)}
+      `;
+      fig.onclick = () => {
+        selectedRhythm[genreKey] = idx;
+        figRow.querySelectorAll('.rhythm-fig').forEach((f, i) => {
+          f.classList.toggle('rhythm-fig-active', i === idx);
+        });
+      };
+      figRow.appendChild(fig);
+    });
+
+    panel.appendChild(figRow);
+
+    // ── Toggle open/close ──
+    toggle.onclick = () => {
+      const open = panel.style.display !== 'none';
+      panel.style.display = open ? 'none' : 'block';
+      toggle.querySelector('.rhythm-toggle-caret').textContent = open ? '▸' : '▾';
+    };
+
+    // Insert before the songs-block (or at end of card)
+    const songsBlock = card.querySelector('.songs-block');
+    if (songsBlock) {
+      card.insertBefore(toggle, songsBlock);
+      card.insertBefore(panel, songsBlock);
+    } else {
+      card.appendChild(toggle);
+      card.appendChild(panel);
+    }
+  }
+
+  /* ── Inject play buttons into all chord-blocks and feeling-cards ─ */
+  document.addEventListener('DOMContentLoaded', () => {
+    // Genre cards: inject into .chord-block
+    document.querySelectorAll('.chord-block').forEach(block => {
+      const card = block.closest('[data-genre]');
+      if (!card) return;
+      const genreKey = card.getAttribute('data-genre');
+      const progs = block.querySelectorAll('.chord-prog');
+      if (!progs.length) return;
+      injectPlayButtons(block, progs, genreKey, true);
+    });
+
+    // Feeling cards
+    document.querySelectorAll('.feeling-card[data-genre]').forEach(card => {
+      const genreKey = card.getAttribute('data-genre');
+      const progs = card.querySelectorAll('.f-chord');
+      if (!progs.length) return;
+      const lastProg = progs[progs.length - 1];
+      const anchor = document.createElement('div');
+      anchor.className = 'chord-block feeling-play-anchor';
+      lastProg.parentNode.insertBefore(anchor, lastProg.nextSibling);
+      injectPlayButtons(anchor, progs, genreKey, false);
+    });
+
+    // Rhythm toggles — all genres that have patterns defined
+    Object.keys(RHYTHM_PATTERNS).forEach(key => {
+      const card = document.querySelector(`[data-genre="${key}"]`);
+      if (card) injectRhythmToggle(card, key);
+    });
+  });
+
+  function stopAll() {
+    activeNodes.forEach(n => { try { n.stop(0); } catch(e) {} });
+    activeNodes = [];
+    if (activeTimer) { clearTimeout(activeTimer); activeTimer = null; }
+    if (activeBtn) {
+      activeBtn.textContent = '▶ Play';
+      activeBtn.classList.remove('playing');
+      activeBtn = null;
+    }
+  }
+
+  function handlePlayBtn(btn, genreKey) {
+    if (btn === activeBtn) stopAll();
+    else playProgression(btn, genreKey);
+  }
+
+  function injectPlayButtons(container, progEls, genreKey, hasBorder) {
+    const playRow = document.createElement('div');
+    playRow.className = 'play-row';
+    if (!hasBorder) playRow.style.borderTop = 'none';
+    playRow.style.marginTop = '0.5rem';
+    playRow.style.paddingTop = '0';
+
+    progEls.forEach((prog, i) => {
+      const btn = document.createElement('button');
+      btn.className = 'play-btn';
+      btn.textContent = '▶ Play';
+      btn.setAttribute('data-prog', prog.textContent.trim());
+      btn.onclick = () => handlePlayBtn(btn, genreKey);
+
+      const label = document.createElement('span');
+      label.className = 'play-label';
+      label.textContent = progEls.length > 1 ? (i === 0 ? 'Prog 1' : 'Prog 2') : 'Listen';
+
+      const wrap = document.createElement('div');
+      wrap.className = 'play-item';
+      wrap.appendChild(label);
+      wrap.appendChild(btn);
+      playRow.appendChild(wrap);
+    });
+
+    container.appendChild(playRow);
+  }
+</script>
+</body>
+</html>
