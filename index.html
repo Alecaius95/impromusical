@@ -1461,6 +1461,32 @@
         </div>
       </div>
 
+      <!-- RUSSIAN -->
+      <div class="card mood-rust" data-genre="russian">
+        <span class="card-emoji">🪆</span>
+        <h3>Russian / Slavic</h3>
+        <div class="scene-tag">Melancholy · Folk · Drama · Winter</div>
+        <div class="pill-row"><span class="pill key">Minor, stepwise melody, dark soul</span><span class="pill instrument">Balalaika, Piano, Strings, Bayan</span><span class="pill keymode">🎹 D, A, E minor · Phrygian · natural minor</span></div>
+        <ul class="rule-list">
+          <li><span class="bullet">▸</span> Natural minor is the home — avoid the leading tone, it sounds too Western; use the bVII instead</li>
+          <li><span class="bullet">▸</span> Folk signal: stepwise melody with sudden leaps of a 4th or 5th, often in triplets</li>
+          <li><span class="bullet">▸</span> Acceleration — start slow and broaden, then accelerate dramatically into a climax (like Kalinka)</li>
+          <li><span class="bullet">▸</span> Drama: sudden fff block chords, then complete silence — the Russian emotional extreme</li>
+        </ul>
+        <div class="avoid-block"><div class="avoid-block-label">Avoid</div><p>Major keys, bright timbres, or smooth legato — Russian music lives in the dark, the raw, and the extreme. Even the happy songs have a shadow in them.</p></div>
+        <div class="chord-block">
+          <div class="chord-block-label">Chord Progressions</div>
+          <span class="chord-prog">i – VII – VI – VII</span><span class="chord-prog">i – iv – i – V7</span>
+          <div class="chord-note">The i–VII–VI–VII Aeolian loop is the backbone of Russian folk and Romantic music alike. The iv gives the darker, more tragic colour — minor subdominant is a distinctly Slavic sound.</div>
+        </div>
+        <div class="songs-block">
+          <div class="songs-block-label">Reference Songs</div>
+          <div class="song-row"><span class="song-title">Traditional — <em>Kalinka</em> (Red Army Choir) 🎤</span><span class="song-links"><a class="song-link yt" href="https://www.youtube.com/results?search_query=Kalinka+Red+Army+Choir" target="_blank">Y</a><a class="song-link sp" href="https://open.spotify.com/search/Kalinka%20Red%20Army%20Choir" target="_blank">S</a></span></div>
+          <div class="song-row"><span class="song-title">Tchaikovsky — <em>Swan Lake: Russian Dance</em></span><span class="song-links"><a class="song-link yt" href="https://www.youtube.com/results?search_query=Tchaikovsky+Swan+Lake+Russian+Dance" target="_blank">Y</a><a class="song-link sp" href="https://open.spotify.com/track/6resXsZGZG5rHLRn5Wlks8" target="_blank">S</a></span></div>
+          <div class="song-row"><span class="song-title">Kino / Viktor Tsoi — <em>Группа крови (Blood Type)</em> 🎤</span><span class="song-links"><a class="song-link yt" href="https://www.youtube.com/results?search_query=Kino+Viktor+Tsoi+Gruppa+Krovi" target="_blank">Y</a><a class="song-link sp" href="https://open.spotify.com/track/0lrCqVZRUsryeaFxiR5YX5" target="_blank">S</a></span></div>
+        </div>
+      </div>
+
     </div>
   </div><!-- end song genres -->
 
@@ -1612,6 +1638,7 @@
     'rap':            'pad',
     'japanese':       'pluck',
     'arabic':         'pluck',
+    'russian':        'strings',
     // feelings
     'comic':     'marimba',
     'sad':       'strings',
@@ -1807,6 +1834,7 @@
     'rap':              { root:5,  mode:'minor' }, // F minor
     'japanese':         { root:9,  mode:'major' }, // A major
     'arabic':           { root:2,  mode:'minor' }, // D Hijaz
+    'russian':          { root:2,  mode:'minor' }, // D minor
     // Feelings
     'comic':            { root:0,  mode:'major' },
     'sad':              { root:2,  mode:'minor' },
@@ -2325,6 +2353,17 @@
         bpm: 72, sig: [4,4], feel: 'Masmoudi — slow and stately, ornamental',
         bass:  ['b','.','.','.','.','.','.', '.'],
         chord: ['c','.','.','c','.','.','.','.'] },
+    ],
+
+    russian: [
+      { name: 'Folk Troika (4/4)',
+        bpm: 92, sig: [4,4], feel: 'Troika — steady drive, accelerates to climax',
+        bass:  ['b','.','b','.','b','.','b','.'],
+        chord: ['c','.','.','.',  'c', '.', '.', '.'] },
+      { name: 'Slow Romance (3/4)',
+        bpm: 60, sig: [3,4], feel: 'Russian waltz — brooding, dark, expansive',
+        bass:  ['b', '.', '.', '.', '.', '.'],
+        chord: ['.', 'c', '.', 'c', '.', '.'] },
     ],
 
   };
