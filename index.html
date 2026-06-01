@@ -1462,6 +1462,32 @@
         </div>
       </div>
 
+      <!-- PUNK -->
+      <div class="card mood-red" data-genre="punk">
+        <span class="card-emoji">🤟</span>
+        <h3>Punk</h3>
+        <div class="scene-tag">Ribellione · Rabbia · Velocità · Anti-tutto</div>
+        <div class="pill-row"><span class="pill key">Accordi di potenza, tempo forsennato</span><span class="pill instrument">Chitarra elettrica distorta, Basso, Batteria</span><span class="pill keymode">🎹 E, A, D minor · major · non importa</span></div>
+        <ul class="rule-list">
+          <li><span class="bullet">▸</span> Tre accordi, suonati il più forte e veloce possibile — la tecnica è irrilevante, l'attitudine è tutto</li>
+          <li><span class="bullet">▸</span> I–IV–V o I–bVII–IV: progressioni semplicissime, nessun abbellimento, nessuna esitazione</li>
+          <li><span class="bullet">▸</span> Backbeat brutale su 2 e 4 — staccato, secco, senza rimpianti</li>
+          <li><span class="bullet">▸</span> Finisci di botto: nessuna coda, nessun fade — accordo finale e silenzio totale</li>
+        </ul>
+        <div class="avoid-block"><div class="avoid-block-label">Avoid</div><p>Assoli, abbellimenti, dinamiche graduali, accordi con estensioni — il punk è anti-virtuosismo per principio. Se stai pensando troppo, stai sbagliando.</p></div>
+        <div class="chord-block">
+          <div class="chord-block-label">Chord Progressions</div>
+          <span class="chord-prog">I – IV – V – I</span><span class="chord-prog">I – bVII – IV – I</span>
+          <div class="chord-note">I–IV–V martellato veloce è il punk britannico (Ramones, Clash). Il bVII dà un colore più grezzo e ribelle — lo stesso accordo che porta via dal punk verso il garage rock.</div>
+        </div>
+        <div class="songs-block">
+          <div class="songs-block-label">Reference Songs</div>
+          <div class="song-row"><span class="song-title">Ramones — <em>Blitzkrieg Bop</em> 🎤</span><span class="song-links"><a class="song-link yt" href="https://www.youtube.com/results?search_query=Ramones+Blitzkrieg+Bop" target="_blank">Y</a><a class="song-link sp" href="https://open.spotify.com/track/1wsRitfRRtWyEapl0q22o8" target="_blank">S</a></span></div>
+          <div class="song-row"><span class="song-title">The Clash — <em>London Calling</em> 🎤</span><span class="song-links"><a class="song-link yt" href="https://www.youtube.com/results?search_query=The+Clash+London+Calling" target="_blank">Y</a><a class="song-link sp" href="https://open.spotify.com/track/64vox8in2DxNGDnZhHYRQW" target="_blank">S</a></span></div>
+          <div class="song-row"><span class="song-title">Sex Pistols — <em>Anarchy in the U.K.</em> 🎤</span><span class="song-links"><a class="song-link yt" href="https://www.youtube.com/results?search_query=Sex+Pistols+Anarchy+in+the+UK" target="_blank">Y</a><a class="song-link sp" href="https://open.spotify.com/track/3Yp3UoHmDV7j5xRV3yGGJL" target="_blank">S</a></span></div>
+        </div>
+      </div>
+
     </div>
   </div><!-- end song genres -->
 
@@ -1613,6 +1639,7 @@
     'japanese':       'pluck',
     'arabic':         'pluck',
     'russian':        'strings',
+    'punk':           'brass',
     // feelings
     'comic':     'marimba',
     'sad':       'strings',
@@ -1808,6 +1835,7 @@
     'japanese':         { root:9,  mode:'major' }, // A major
     'arabic':           { root:2,  mode:'minor' }, // D Hijaz
     'russian':          { root:2,  mode:'minor' }, // D minor
+    'punk':             { root:4,  mode:'major' }, // E major
     // Feelings
     'comic':            { root:0,  mode:'major' },
     'sad':              { root:2,  mode:'minor' },
@@ -2324,6 +2352,17 @@
         bpm: 60, sig: [3,4], feel: 'Russian waltz — brooding, dark, expansive',
         bass:  ['b', '.', '.', '.', '.', '.'],
         chord: ['.', 'c', '.', 'c', '.', '.'] },
+    ],
+
+    punk: [
+      { name: 'Punk Blast (4/4)',
+        bpm: 180, sig: [4,4], feel: 'Full throttle — three chords, no mercy',
+        bass:  ['b','.','b','.','b','.','b','.'],
+        chord: ['c','.','.','.','c','.','.','.'] },
+      { name: 'Punk Stomp (4/4)',
+        bpm: 152, sig: [4,4], feel: 'Stomp — backbeat hard on 2 & 4, aggressive',
+        bass:  ['b','.','.','.',  'b', '.', '.', '.'],
+        chord: ['.','.',  'c', '.', '.', '.', 'c', '.'] },
     ],
 
   };
